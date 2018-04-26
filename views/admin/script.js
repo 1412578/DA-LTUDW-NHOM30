@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
     xoaSP.addEventListener('click', function(){
         var spXoa = document.querySelector("#lblxoaTheoTen").value;
         var table = document.querySelector('#LayBang');
-
+        console.log(table);
         var DSSPS = document.getElementById('DanhSachSP');
         var DSF = DSSPS.getElementsByTagName('tr');
         for (var i = 0; i < DSF.length; i++) {
