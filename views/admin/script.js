@@ -24,15 +24,18 @@ document.addEventListener("DOMContentLoaded", function(){
     var sanPhamXoa = "St Remy Napoleon";
 
     xoaSP.addEventListener('click', function(){
+        var spXoa = document.querySelector("#lblxoaTheoTen").value;
         var table = document.querySelector('#LayBang');
-        console.log(table);
-        var DSF = DSSP.getElementsByTagName('tr');
+
+        var DSSPS = document.getElementById('DanhSachSP');
+        var DSF = DSSPS.getElementsByTagName('tr');
         for (var i = 0; i < DSF.length; i++) {
-            if(DSF[i].querySelector('td').innerText == "Raynal"){
+            console.log(DSF[i].querySelector('td').innerText);
+            if(DSF[i].querySelector('td').innerText == spXoa){
                 table.deleteRow(i);
             }
         }
-        console.log(DSF);
+
     })
 
 	 x = document.getElementById('mySelect').value;
