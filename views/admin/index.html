@@ -1,120 +1,260 @@
-// Load trước khi xử lí JS
-document.addEventListener("DOMContentLoaded", function(){
-    
-    var DSSP = document.getElementById('DanhSachSP');
-    
-    var themSP = document.getElementById('btnThemSanPham');
-    themSP.addEventListener('click', function(){
-        var tenSanPham = document.querySelector("#lbltenSamPham").value;
-        var loaiSanPham = document.querySelector('#lblLoaiSanPham').value;
-        var nhaSanXuat = document.querySelector('#lblNhaSanXuat').value;
-       
-        var s = "<tr>"+
-                    "<td>"+tenSanPham+"</td>"+
-                    "<td>"+loaiSanPham+"</td>"+
-                    "<td>"+nhaSanXuat+"</td>"+
-                "</tr>"
-        
-        DSSP.innerHTML += s;
-        console.log(DSSP.innerText);
-    })
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	body{
+  		margin: 10px;
+  	}
+  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body >
+	<div class="container">
+		<div class="row">
+			<!-- Danh mục chức năng-->
+			<div class="col-md-4">
+				<ul class="nav navbar-link">
 
-    var xoaSP = document.getElementById('btnXoaSanPham');
-    var sanPhamXoa = "St Remy Napoleon";
+				    <li >
+				    	<a data-toggle="tab" href="#ThongTinTaiKhoan"> 
+				    		<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspThông tin tài khoản
+				    	</a>
+				    </li>
 
-    xoaSP.addEventListener('click', function(){
-        var table = document.querySelector('#LayBang');
-        console.log(table);
-        var DSF = DSSP.getElementsByTagName('tr');
-        for (var i = 0; i < DSF.length; i++) {
-            if(DSF[i].querySelector('td').innerText == "Raynal"){
-                table.deleteRow(i);
-            }
-        }
-        console.log(DSF);
-    })
-
-	 x = document.getElementById('mySelect').value;
-     y = document.getElementById('DoiMau');
-     if(x == "ChuaGiao") y.classList.add('success');
-     else if(x == "DangGiao") y.classList.add('warning');
-     else y.classList.add('info');
-
-     x = document.getElementById('mySelect1').value;
-     y = document.getElementById('DoiMau1');
-     if(x == "ChuaGiao") y.classList.add('success');
-     else if(x == "DangGiao") y.classList.add('warning');
-     else y.classList.add('info');
-
-     x = document.getElementById('mySelect2').value;
-     y = document.getElementById('DoiMau2');
-     if(x == "ChuaGiao") y.classList.add('success');
-     else if(x == "DangGiao") y.classList.add('warning');
-     else y.classList.add('info');
-
-     x = document.getElementById('mySelect3').value;
-     y = document.getElementById('DoiMau3');
-     if(x == "ChuaGiao") y.classList.add('success');
-     else if(x == "DangGiao") y.classList.add('warning');
-     else y.classList.add('info');
-}, false)
-
-function myFunction() {
-    x = document.getElementById('mySelect').value;
-    y = document.getElementById('DoiMau');
-    y.classList.remove('success');
-    y.classList.remove('warning');
-    y.classList.remove('info');
-
-    if(x == "ChuaGiao") y.classList.add('success');
-    else if(x == "DangGiao") y.classList.add('warning');
-    else y.classList.add('info');
-    console.log(x);
-    console.log(y);
-}
+				    
+					<li>
+				    	<a data-toggle="tab" href="#QuanLySanPham"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspQuản lí sản phẩm</a>
+				    </li>
 
 
-function myFunction1() {
-	x = document.getElementById('mySelect1').value;
-    y = document.getElementById('DoiMau1');
-    y.classList.remove('success');
-    y.classList.remove('warning');
-    y.classList.remove('info');
-
-    if(x == "ChuaGiao") y.classList.add('success');
-    else if(x == "DangGiao") y.classList.add('warning');
-    else y.classList.add('info');
-    console.log(x);
-    console.log(y);
-}
-
-function myFunction2() {
-	x = document.getElementById('mySelect2').value;
-    y = document.getElementById('DoiMau2');
-    y.classList.remove('success');
-    y.classList.remove('warning');
-    y.classList.remove('info');
-
-    if(x == "ChuaGiao") y.classList.add('success');
-    else if(x == "DangGiao") y.classList.add('warning');
-    else y.classList.add('info');
-    console.log(x);
-    console.log(y);
-}
+				    <li>
+				    	<a data-toggle="tab" href="#QuanLiDonHang"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspQuản lí Đơn hàng</a>
+				    </li>
+				</ul>
+			</div>
 
 
-function myFunction3() {
-	x = document.getElementById('mySelect3').value;
-    y = document.getElementById('DoiMau3');
-    y.classList.remove('success');
-    y.classList.remove('warning');
-    y.classList.remove('info');
 
-    if(x == "ChuaGiao") y.classList.add('success');
-    else if(x == "DangGiao") y.classList.add('warning');
-    else y.classList.add('info');
-    console.log(x);
-    console.log(y);
-}
+			<div class="tab-content col-md-8"> 
+				    <div id="ThongTinTaiKhoan" class="tab-pane fade">
+					 <div class="col-md-6">
+					 	<h3 style="color: #00bfff;">Thêm sản phẩm</h3>
+					 	<form>
+						    <div class="form-group">
+						      <label for="usr">Tên sản phẩm:</label>
+						      <input type="text" class="form-control" id="lbltenSamPham" placeholder="Nhập tên sản phẩm">
+						    </div>
+						    <div class="form-group">
+						      <label for="pwd">Loại sản phẩm:</label>
+						      <input type="text" class="form-control" id="lblLoaiSanPham" placeholder="Nhập loại sản phẩm">
+						    </div>
+						    <div class="form-group">
+						      <label for="pwd">Nhà sản xuất:</label>
+						      <input type="text" class="form-control" id="lblNhaSanXuat" placeholder="Nhập nhà sản xuất">
+						    </div>
+						    <div class="form-group">
+						      <button type="button" class="btn btn-success btn-block" id="btnThemSanPham">Thêm sản phẩm</button>
+						    </div>
+						  </form>
+					 </div>
+					 	
+					 <div class="col-md-6">
+					 <h3 style="color: #00bfff;">Xóa sản phẩm</h3>
+					    <form>
+						    <div class="form-group">
+						      <label for="usr">Xóa theo tên:</label>
+						      <input type="text" class="form-control" id="lblxoaTheoTen" placeholder="Tên sản phẩm muốn xóa">
+						    </div>
+						    <div class="form-group">
+						      <button type="button" class="btn btn-warning btn-block" id = "btnXoaSanPham">Xóa sản phẩm</button>
+						    </div>
+				        </form>
+					</div>
 
+					</div>
+
+				    <div id="QuanLySanPham" class="tab-pane fade">
+				      <table class="table" id ="LayBang">
+					    <thead>
+					      <tr>
+					        <th>Sản Phẩm</th>
+					        <th>Loại Sản Phẩm</th>
+					        <th>Nhà Sản Xuất</th>
+					      </tr>
+					    </thead>
+					    <tbody id = "DanhSachSP">
+					    	<!-- Loại Brandy-->
+					      <tr>
+					        <td>St Remy Napoleon</td>
+					        <td>Brandy</td>
+					        <td> Den Helkenwijk</td>
+					      </tr>
+
+					      <tr>
+					        <td>Napoleon Dumas</td>
+					        <td>Branky</td>
+					        <td> Den Helkenwijk</td>
+					      </tr>
+
+					      <tr>
+					        <td>Louis Chevallier</td>
+					        <td>Branky</td>
+					        <td> Den Helkenwijk</td>
+					      </tr>
+
+					      <tr>
+					        <td>Raynal</td>
+					        <td>Branky</td>
+					        <td> Den Helkenwijk</td>
+					      </tr>
+
+					      <!--Loại Whisky-->
+					       <tr>
+					        <td>Scotch Whisky</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+
+					      <tr>
+					        <td>American Whiskey</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+
+					      <tr>
+					        <td>Canadian Whisky</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+
+					      <tr>
+					        <td>Irish Whiskey.</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+
+					      <!-- Loaijk Rhum -->
+
+					      <tr>
+					        <td>Rhum Puerto Rico</td>
+					        <td>Rhum</td>
+					        <td>john@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Rhum Jamaica</td>
+					        <td>Rhum</td>
+					        <td>mary@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Rhum Demeraran</td>
+					        <td>Rhum</td>
+					        <td>july@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Rhum Martinique</td>
+					        <td>Rhum</td>
+					        <td>july@example.com</td>
+					      </tr>
+
+					      <!-- Loại Vodka -->
+					      <tr>
+					        <td>Smirnoff</td>
+					        <td>Vodka</td>
+					        <td>john@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Absolut</td>
+					        <td>Vodka</td>
+					        <td>mary@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Stolichnaya</td>
+					        <td>Vodka</td>
+					        <td>july@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Finlandia</td>
+					        <td>Vodka</td>
+					        <td>july@example.com</td>
+					      </tr>
+
+						<!-- Loại Gin -->
+						  <tr>
+					        <td>LondonDryGin</td>
+					        <td>Gin</td>
+					        <td>john@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>AmericanDryGin</td>
+					        <td>Gin</td>
+					        <td>mary@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>GeneverGin</td>
+					        <td>Gin</td>
+					        <td>july@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>OldTomGin</td>
+					        <td>Gin</td>
+					        <td>july@example.com</td>
+					      </tr>
+
+					      <tr>
+					        <td>Irish Whiskey</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+
+					      <tr>
+					        <td>Irish Whiskey</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+
+					      <tr>
+					        <td>Irish Whiskey</td>
+					        <td>Whisky</td>
+					        <td> Lindores Abbey</td>
+					      </tr>
+					    </tbody>
+					  </table>
+				    </div>
+
+				    <div id="QuanLiDonHang" class="tab-pane fade">
+				      <table class="table" id ="LayBangQuanLiDonHang">
+					    <thead>
+					      <tr>
+					        <th>Ngày mua</th>
+					        <th>Sản phẩm</th>
+					        <th>Tổng tiền</th>
+					        <th>Trạng thái đơn hàng</th>
+					      </tr>
+					    </thead>
+
+					    <tbody id = "DonHang">
+
+					    </tbody>
+  					 </table>
+				    </div>
+			  </div>
+		</div>
+	</div>
+	<script type="text/javascript" src="DuLieu.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
