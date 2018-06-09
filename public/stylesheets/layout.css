@@ -1,0 +1,102 @@
+body{
+	background-color: white;
+}
+@font-face{
+	font-family: "IBM Plex Serif";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/fonts/IBMPlexSerif-Regular.ttf");
+}
+.search-btn{
+	background: none;
+	border: none;
+	border-bottom: solid 1.5px #c7c7c7;
+	color: black;
+}
+.hero{
+	padding: 10px 0;
+}
+.bg-dark-75{
+	background-color: rgba(0,0,0, 0.6);
+}
+.sidebar{
+	background-color: white;
+}
+#sidebar .nav a{
+	color:#000;
+}
+#sidebar .nav a:hover{
+	color: black;
+	font-weight: bold;
+}
+.nav-header{
+	padding: 9px 17px;
+	background: white;
+}
+.bg-stand-out{
+	margin-top: -90px;
+	background-size: cover;
+	height: 100vh;
+	overflow: hidden;
+	background-image: url("/images/22.jpg");
+}
+.navbar.scrolled{
+	border-bottom: solid 1px #dbdbdb !important;
+}
+.navbar.scrolled .navbar-brand{
+	font-size: 1.2rem;
+	margin-bottom: -2.35px;
+}
+.navbar-brand{
+	font-family: 'IBM Plex Serif', serif;
+	font-size: 2rem;
+	color: inherit;
+	transition: font-size 0.3s ease-in-out, margin-bottom 0.3s;
+}
+/* Add the below transitions to allow a smooth color change similar to lyft */
+.navbar{
+	background-color: white!important;
+}
+.navbar .navbar-nav-standout{
+	margin-top: -17px;
+	transition: margin-top 0.3s;
+	color: white;
+	margin-bottom: -8px;
+}
+.navbar.scrolled .navbar-nav-standout{
+	margin-top: -8px;
+	color: white;
+	margin-bottom: -8px;
+}
+.navbar .navbar-nav-standout:hover{
+	background-color: #f6f6f6;
+}
+.navbar .navbar-nav-standout .nav-item{
+	display: flex;
+	align-items: center;
+}
+.badge-notification{
+	color: white;
+	background-color: #666;
+	padding: 5px;
+}
+.shopBtn {
+	min-height: 34px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 34px;
+	text-align: center;
+	color: #fff;
+	border-radius: 2px;
+	background: #a5a5a5;
+	display:inline-block;
+	padding:0 12px;
+	border:0;}
+.shopBtn:hover {
+	color: #fff;
+	text-decoration:none; 
+	background: #2E2E2E;
+}
+.control-group{
+	margin-bottom: 10px;
+}

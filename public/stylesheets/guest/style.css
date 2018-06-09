@@ -72,8 +72,6 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .cart{border:1px solid #ddd;  }
 #sidebar ul {margin: 0;padding: 0;}
 #sidebar .alert {padding: 8px;}
-#sidebar .nav a{color:#000}
-#sidebar .nav a:hover{color:#f89406}
 #sidebar .cart{border:1px solid #B94A48; }
 #sidebar h4{margin:0;  line-height:1.5em; padding:0 13px;  }
 #sidebar h2{font-size:21px; line-height:21px;}
@@ -121,11 +119,6 @@ hr.soften {margin: 8px 0;background: #DDD;}
 }
 .nav-custom .dropdown.open .dropdown-toggle{
 	background-color: white !important;
-}
-.search-btn{
-	background-color: white!important;
-	border-radius: 4px !important;
-	border: solid 1px white !important;
 }
 .logo{
 	padding-top: 9px !important;
