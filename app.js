@@ -5,6 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var routes = require('./routes/routes.js');
+var session = require('express-session');
+var sessionPassData = require("./middle-wares/sessionPassData");
 
 var app = express();
 
@@ -22,7 +24,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Session
+app.use(session({
+	secret: "...,^.^,...",
+	cookie: {maxAge: 7*24*60*60*1000},
+	saveUninitialized: false,
+	resave: false
+}));
 // Routes
+app.use(sessionPassData);
 app.use('/', routes.index());
 app.use('/user', routes.users());
 app.use('/session', routes.sessions());

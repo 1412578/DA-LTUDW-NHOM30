@@ -8,7 +8,7 @@ exports.check = username =>{
 	var sql = `SELECT username FROM user WHERE username = '${username}'`;
 	return db.load(sql);
 }
-exports.login = user => {
-	var sql = `select * from user where username = '${user.username}' and password = '${user.password}'`;
+exports.findByUsername = username => {
+	var sql = `select name, password from user where username = '${username}'`;
 	return db.load(sql);
 }

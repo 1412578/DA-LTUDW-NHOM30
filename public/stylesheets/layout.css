@@ -100,3 +100,13 @@ body{
 .control-group{
 	margin-bottom: 10px;
 }
+.footer {
+	background-color:#e7e7e7; 
+	color:#202020; 
+	padding: 28px 8px 18px; 
+	margin-top: 18px;
+}
+.footer a{
+	color:#1e1e1e; 
+	font-size:12px;
+}

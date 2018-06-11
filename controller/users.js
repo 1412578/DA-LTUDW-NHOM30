@@ -9,23 +9,26 @@ function show(req, res, next){
 
 function create(req, res, next){
 	var user = {};
+	var fields = ["username", "password", "email", "name", "address", "gender", "birthday", "phone"];
+
+	// Kiểm tra có field nào rỗng không
+	var missingField = fields.find(requiredField=> !req.body[requiredField]);
+	if (missingField){
+		res.redirect("/user/new?msg="+ missingField + " không được bỏ trống");
+		return;
+	}
+
+	// Kiểm tra trùng username
 	userRepo.check(req.body.username).then(rows=>{
 		if (rows.length == 0){
-			user = {
-				"username": req.body.username,
-				"password": req.body.password,
-				"role": "customer",
-				"email": req.body.email,
-				"name": req.body.name,
-				"address": req.body.address,
-				"gender": req.body.gender,
-				"birthday": req.body.birthday,
-				"phone": req.body.phone
-			};
+
+			fields.forEach(field => user[field] = req.body[field])
+			user.role = "customer";
+
 			return bcrypt.hash(user.password, saltRounds);
 		}
 		else
-			throw new Error('Username đã tồn tại');
+			throw new Error('Username phải là duy nhất');
 	})
 	.then(hash=>{
 		user.password = hash;
