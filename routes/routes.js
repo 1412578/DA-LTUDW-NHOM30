@@ -17,6 +17,9 @@ module.exports = {
 
 		router.get('/new', restrict.guest, users.show);
 		router.post('/create', restrict.guest, users.create);
+		router.get('/info', restrict.user, users.info);
+		router.post('/update', restrict.user, users.update);
+		router.get('/cart', restrict.user, users.cart);
 		
 		return router;
 	},
@@ -25,7 +28,7 @@ module.exports = {
 
 		router.post('/create', restrict.guest,  sessions.create);
 		router.get('/delete', restrict.user, sessions.delete);
-		
+
 		return router;
 	}
 }
