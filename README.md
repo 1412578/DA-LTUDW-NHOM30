@@ -12,7 +12,7 @@ Thành viên
 * Đường dẫn phân hệ user: localhost:8080/user/profile.html
 * Đường dẫn phân hệ guest: localhost:8080/index.html
 ## Cơ sở dữ liệu
-* connection: 35.229.226.167
+* connection: 35.229.203.138
 * port: 3306
 * username: user
 * password: user
