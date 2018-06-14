@@ -42,6 +42,8 @@ app.use(sessionPassData);
 app.use('/', routes.index());
 app.use('/user', routes.users());
 app.use('/session', routes.sessions());
+app.use('/product', routes.products());
+app.use('/category', routes.categories());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

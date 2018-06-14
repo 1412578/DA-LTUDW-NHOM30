@@ -1,5 +1,10 @@
 <h5>THÔNG TIN TÀI KHOẢN</h5>
 <hr class="soften">
+{{#if msg}}
+<div class="alert alert-primary">
+	{{msg}}
+</div>
+{{/if}}
 <form method="post" action="/user/update">
 	<div class="form-group">
 		<label for="name">Họ tên</label>
@@ -20,17 +25,16 @@
 	<div class="form-group">
 		<label for="gender">Giới tính</label>
 		<div class="form-group">
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" name="gender" type="radio" value="male" {{#if_eq user.gender "male"}}checked{{/if_eq}}/>
-				<label class="form-check-label">Nam</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" name="gender" type="radio" value="female"  {{#if_eq user.gender "female"}}checked{{/if_eq}}/>
-				<label class="form-check-label">Nữ</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" name="gender" type="radio" value="other"  {{#if_eq user.gender "other"}}checked{{/if_eq}}/>
-				<label class="form-check-label">Khác</label>
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			  <label class="btn btn-outline-dark {{#if_eq user.gender "male"}}active{{/if_eq}}">
+			    <input type="radio" name="gender" id="option1" autocomplete="off" value="male"  {{#if_eq user.gender "male"}}checked{{/if_eq}}> Nam
+			  </label>
+			  <label class="btn btn-outline-dark {{#if_eq user.gender "female"}}active{{/if_eq}}">
+			    <input type="radio" name="gender" id="option2" autocomplete="off" value="female"  {{#if_eq user.gender "female"}}checked{{/if_eq}}> Nữ
+			  </label>
+			  <label class="btn btn-outline-dark {{#if_eq user.gender "other"}}active{{/if_eq}}">
+			    <input type="radio" name="gender" id="option3" autocomplete="off" value="other"  {{#if_eq user.gender "other"}}checked{{/if_eq}}> Khác
+			  </label>
 			</div>
 		</div>
 	</div>

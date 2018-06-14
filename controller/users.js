@@ -49,7 +49,7 @@ function info(req, res, next){
 		if (rows.length > 0){
 			user = rows[0];
 			user.birthday = moment(user.birthday).format("YYYY-MM-DD");
-			res.render("user/profile", {layout: "layout_user", "user": user});
+			res.render("user/profile", {layout: "layout_user", "user": user, "msg": req.query.msg});
 		}
 		else
 			throw new Error("Tài khoản không tồn tại");
@@ -67,7 +67,7 @@ function update(req, res, next){
 		}
 	})
 	.then(value=>{
-		res.redirect("/user/info");
+		res.redirect("/user/info?msg="+"Đã cập nhật thành công");
 	})
 	.catch(err=>{
 		next(err);
@@ -78,5 +78,9 @@ function cart(req, res, next){
 	res.render("user/cart", {layout: "layout_user"});
 }
 
-module.exports =  {"show": show, "create": create, "info": info, "cart": cart, "update": update};
+function history(req, res, next){
+	res.render("user/history", {layout: "layout_user"});
+}
+
+module.exports =  {"show": show, "create": create, "info": info, "cart": cart, "update": update, "history": history};
 
