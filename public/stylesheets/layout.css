@@ -7,6 +7,12 @@ body{
 	font-weight: 400;
 	src: url("/fonts/IBMPlexSerif-Regular.ttf");
 }
+@font-face{
+	font-family: "IBM Plex Serif";
+	font-style: normal;
+	font-weight: bold;
+	src: url("/fonts/IBMPlexSerif-SemiBold.ttf");
+}
 .search-btn{
 	background: none;
 	border: none;
@@ -110,3 +116,58 @@ body{
 	color:#1e1e1e; 
 	font-size:12px;
 }
+.thumbnail .caption {
+	padding: 9px;
+	color: #555555;
+}
+.thumbnail .caption h5{
+	font-size: 16px;
+}
+.product-item{
+	height: 320px;
+	padding: 5px;
+	position: relative;
+}
+.product-item:before{
+	content: " ";
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+}
+.img-wrapper{
+	height: 80%;
+	overflow: hidden;
+	position: relative;
+}
+.img-wrapper img{
+	height: 100%;
+}
+.caption{
+	height: 20%;
+	overflow: hidden;
+}
+.caption .title{
+	text-align: center;
+	font-size: 1.25rem;
+	color: black;
+	font-size: 1rem;
+}
+.caption .price{
+	text-align: center;
+	color: #b82525;
+	font-size: 1rem;
+}
+.caption .view{
+	color: black;
+	font-size: 1rem;
+}
+.section-title{
+	display: flex;
+}
+.section-title .badge{
+	align-self: flex-start;
+	margin-left: 5px;
+	color: white;
+}
+
+

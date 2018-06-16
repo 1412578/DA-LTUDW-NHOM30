@@ -4,6 +4,8 @@ var users = require("../controller/users");
 var products = require("../controller/products");
 var sessions = require("../controller/sessions");
 var categories = require("../controller/categories");
+var vendors = require("../controller/vendors");
+var admin = require("../controller/admin");
 var restrict = require('../middle-wares/restrictAccess');
 
 module.exports = {
@@ -45,6 +47,20 @@ module.exports = {
 		var router = express.Router();
 
 		router.get('/:id', categories.show);
+
+		return router;
+	},
+	"vendors": function(){
+		var router = express.Router();
+
+		router.get('/:id', vendors.show);
+
+		return router;
+	},
+	"admin": function(){
+		var router = express.Router();
+
+		router.get('/', admin.index);
 
 		return router;
 	}

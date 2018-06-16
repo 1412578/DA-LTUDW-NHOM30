@@ -44,6 +44,8 @@ app.use('/user', routes.users());
 app.use('/session', routes.sessions());
 app.use('/product', routes.products());
 app.use('/category', routes.categories());
+app.use('/vendor', routes.vendors());
+app.use('/admin', routes.admin());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
