@@ -1,21 +1,7 @@
-html{
-	font-family: "Roboto", sans-serif;
-	font-size: 16px;
-}
-body{
-	background-color: #dfdfdf;
-}
-.userbar{
-	width: 150px;
-	background-color: #f1f1f1;
-	display: flex;
-	flex-direction: column;
-}
 .userbar-item{
-    font-size: 11px;
-    text-align: center;
+    font-size: 0.8rem;
     color: #565656;
-    padding: 24px 0;
+    padding: 8px 0;
     display: flex;
     flex-direction: column;
     text-decoration: none !important;
@@ -24,25 +10,10 @@ body{
 	font-size: 22px;
 }
 .userbar-item span{
-	    margin-top: 8px;
-    letter-spacing: 0.3px;
-    font-weight: 500;
-}
-.userbar-item:hover{
-	background-color: #ececec;
+    margin-top: 8px;
 }
 .userbar-item.selected{
 	background-color: white;
-}
-.content{
-	padding: 10px 25px;
-	flex-grow: 1;
-}
-.user{
-	border-radius: 2px;
-	background-color: white;
-    display: flex;
-    flex-direction: row;
 }
 .info{
 	display: flex;
@@ -62,23 +33,13 @@ body{
 	padding: 5px 0;
 }
 .info-label span{
-	font-size: 13px;
+	font-size: 1rem;
 	vertical-align: middle;
 	letter-spacing: 0.3px;
 }
-.value{
-	display: flex;
-	flex-grow: 1;
-}
-.value select{
-	padding: 5px 10px;
-}
-.value .col{
-	width: 33%;
-	margin-right: 10px;
-}
-.value label input{
-	
+.form-control{
+	border-radius: 0;
+	border-color: #686868;
 }
 .update{
 	margin-left: 160px;
@@ -89,4 +50,9 @@ body{
     font-size: 0.9em;
     font-weight: 500;
     font-family: "Roboto";
+}
+.table-cart{
+	display: flex;
+	flex-direction: column;
+	min-height: calc(100vh - 200px);
 }

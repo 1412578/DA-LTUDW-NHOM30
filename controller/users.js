@@ -1,6 +1,7 @@
 var express = require('express');
 var userRepo = require('../repos/userRepo');
 var bcrypt = require('bcrypt');
+var moment = require('moment');
 const saltRounds = 10;
 
 function show(req, res, next){
@@ -42,6 +43,44 @@ function create(req, res, next){
 	});
 	
 }
+function info(req, res, next){
+	var user = {};
+	userRepo.load(req.session.username).then(rows=>{
+		if (rows.length > 0){
+			user = rows[0];
+			user.birthday = moment(user.birthday).format("YYYY-MM-DD");
+			res.render("user/profile", {layout: "layout_user", "user": user, "msg": req.query.msg});
+		}
+		else
+			throw new Error("Tài khoản không tồn tại");
+	}).catch(error=>{
+		next(error);
+	});
+}
+function update(req, res, next){
+	var fields = ["name", "phone", "address", "email", "gender", "birthday"];
+	var user = {};
+	fields.forEach(field=> user[field] = req.body[field]);
+	userRepo.check(req.session.username).then(rows=>{
+		if (rows.length > 0){
+			return userRepo.update(user);
+		}
+	})
+	.then(value=>{
+		res.redirect("/user/info?msg="+"Đã cập nhật thành công");
+	})
+	.catch(err=>{
+		next(err);
+	});
+}
 
-module.exports =  {"show": show, "create": create}
+function cart(req, res, next){
+	res.render("user/cart", {layout: "layout_user"});
+}
+
+function history(req, res, next){
+	res.render("user/history", {layout: "layout_user"});
+}
+
+module.exports =  {"show": show, "create": create, "info": info, "cart": cart, "update": update, "history": history};
 

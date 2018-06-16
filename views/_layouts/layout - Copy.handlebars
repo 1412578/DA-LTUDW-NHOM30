@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>VTeam Shopping Website</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Cửa hàng bán rượu trực tuyến">
 		<meta name="author" content="VTeam">
 		<link href="/stylesheets/bootstrap.css" rel="stylesheet"/>
@@ -21,16 +21,33 @@
 	</head>
 	<body>
 		{{> header_section}}
-
 		<br>
 		<br>
 		<br>
 		<br>
-		
 		<div class="container">
 			<div id="gototop"> </div>
 			<br>
 			<div class="row">
+				<div id="sidebar" class="col-sm-3">
+					<h3>Sản phẩm xem nhiều</h3>
+					<hr class="soften"/>
+					<div class="well well-small">
+						<ul class="nav flex-column sidebar">
+							<li class="nav-item"><a class="nav-link" href="/category/1">Brandy</a></li>
+							<li class="nav-item"><a class="nav-link" href="/category/2">Whisky</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_1.html">Rhum</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_2.html">Vodka</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_1.html">Gin</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_2.html">Vin(Wine)</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_1.html">Tequila</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_2.html">Liqueurs </a></li>
+							<li class="nav-item"><a class="nav-link" href="products_1.html">Hennessy</a></li>
+							<li class="nav-item"><a class="nav-link" href="products_2.html">Chivas</a></li>
+							<li style="border:0"> &nbsp;</li>
+						</ul>
+					</div>
+				</div>
 				{{{body}}}
 			</div>
 		</div>
@@ -53,19 +70,20 @@
 		<script src="/javascripts/bootstrap.bundle.min.js"></script>
 		<script>
 		
-			(function(){
+			 (function(){
 				var lock = false;
 				function checkScroll(){
-				var startY = 10;
-				if($(window).scrollTop() > startY){
-				$('.navbar').addClass("scrolled");
-				}else{
-				$('.navbar').removeClass("scrolled");
+				    var startY = 10; 
+				    if($(window).scrollTop() > startY){
+				        $('.navbar').addClass("scrolled");
+				    }else{
+				        $('.navbar').removeClass("scrolled");
+				    }
 				}
-				}
-			$(window).scroll(function(){
-			checkScroll();
-			});
+
+			    $(window).scroll(function(){
+			        checkScroll();
+			    });
 			})();
 		</script>
 	</body>

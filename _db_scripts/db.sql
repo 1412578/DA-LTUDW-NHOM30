@@ -35,9 +35,9 @@ ENGINE = InnoDB;
 -- Table `mydb`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `role` VARCHAR(45) NOT NULL DEFAULT 'customer',
   `email` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NOT NULL,

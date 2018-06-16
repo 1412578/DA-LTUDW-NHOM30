@@ -14,7 +14,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', exphbs({
     defaultLayout: 'layout',
-    layoutsDir: 'views/_layouts/'
+    layoutsDir: 'views/_layouts/',
+    helpers:{
+      if_eq: function(src, target, options){
+        if (src == target) 
+          return options.fn(this);
+      }
+    }
 }));
 app.set('view engine', 'hbs');
 
@@ -36,6 +42,10 @@ app.use(sessionPassData);
 app.use('/', routes.index());
 app.use('/user', routes.users());
 app.use('/session', routes.sessions());
+app.use('/product', routes.products());
+app.use('/category', routes.categories());
+app.use('/vendor', routes.vendors());
+app.use('/admin', routes.admin());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

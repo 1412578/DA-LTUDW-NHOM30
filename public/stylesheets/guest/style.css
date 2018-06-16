@@ -29,7 +29,6 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .thumbnail .btn{ border-radius: 0 0 0 0;}
 .thumbnail h4{line-height:42px}
 .thumbnail img{ max-width:100%}
-.thumbnail:hover {border: 1px solid #CACACA;}
 .form-horizontal.qtyFrm .control-label{text-align: left;}
 .form-horizontal.qtyFrm .control-label span{font-size:18px}
 .clr{clear:both;}
@@ -60,7 +59,6 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .actionList a{width:50%; font-size:11px; color:#444}
 .caption p{margin:0}
 .caption h4{margin:0}
-.thumbnail .caption {padding: 9px;color: #555555;background: #F3F2F2;}
 .copyright {clear: both; padding: 8px; border-top: 1px solid #CCC; font-size: 13px; background: #f2f2f2; box-shadow: 0 0 3px #B1AFAF;}
 .topNav{padding: 0;border-bottom: 1px solid #CCC;background: #f2f2f2;box-shadow: 0 0 3px #B1AFAF;}
 .topNav a{color:#333; font-size:12px; font-weight:bold; display:inline-block;  padding:8px 4px;}
