@@ -16,7 +16,10 @@ Thành viên
 * port: 3306
 * username: user
 * password: user
-* Vd: mysql -u user -p 35.229.226.167
+* Vd: 
+```bash
+mysql -u user -p 35.229.226.167
+```
 * Db scripts nằm ở thư mục db_scripts
 
 ## Yêu cầu đồ án
