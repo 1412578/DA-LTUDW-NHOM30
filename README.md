@@ -1,5 +1,5 @@
 # Đồ án Lập Trình Ứng Dụng Web 
-Đồ án môn Lập Trình Ứng Dụng Web nhóm 30 (28/04/2018 10:00 PM)
+Đồ án môn Lập Trình Ứng Dụng Web nhóm 30 (29/06/2018 10:00 PM)
 Thành viên
 * **1512667**	Trần Cao Việt
 * **1412578**	Trần Quang Trí
@@ -18,7 +18,7 @@ Thành viên
 * password: user
 * Vd: 
 ```bash
-mysql -u user -p 35.229.226.167
+mysql -u user -p 35.229.203.138
 ```
 * Db scripts nằm ở thư mục db_scripts
 
