@@ -26,7 +26,7 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -43,6 +43,7 @@ app.use('/', routes.index());
 app.use('/user', routes.users());
 app.use('/session', routes.sessions());
 app.use('/product', routes.products());
+app.use('/order', routes.orders());
 app.use('/category', routes.categories());
 app.use('/vendor', routes.vendors());
 app.use('/admin', routes.admin());

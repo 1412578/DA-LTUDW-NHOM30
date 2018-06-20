@@ -1,28 +1,40 @@
 <h5>GIỎ HÀNG</h5>
 <hr class="soften">
-<div class="table-cart">
-	<table class="table mb-5 flex-grow-1">
-		<thead>
-			<tr class="cart-item header">
-				<th scope="col" class="item-image">Hình ảnh</th>
-				<th scope="col" class="item-name">Sản phẩm</th>
-				<th scope="col" class="item-quantity">Số lượng</th>
-				<th scope="col" class="item-price">Giá</th>
-				<th scope="col" class="item-totalprice">Thành tiền</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="cart-item">
-				<td class="item-image"></tdtd>
-				<td class="item-name">Sennheiser MX270</td>
-				<td type="number" class="item-quantity"/><input type="text"></td>
-				<td class="item-price">270.000 VNĐ</td>
-				<td class="item-totalprice">270.000 VNĐ</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="d-flex my-auto ml-auto">
-		<button class="shopBtn mr-2">Cập nhật</button>
-		<button class="shopBtn">Đặt hàng</button>
-	</div>
+{{#if msg}}
+<div class="alert alert-primary">
+	{{msg}}
 </div>
+{{/if}}
+<form method="POST" action="/user/cart/update">
+	<div class="table-cart">
+		<table class="table mb-5 flex-grow-1">
+			<thead>
+				<tr class="cart-item header">
+					<th scope="col" class="item-image">Hình ảnh</th>
+					<th scope="col" class="item-name">Sản phẩm</th>
+					<th scope="col" class="item-quantity">Số lượng</th>
+					<th scope="col" class="item-price">Giá</th>
+					<th scope="col" class="item-totalprice">Tổng giá</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each cart}}
+				<tr class="cart-item">
+					<input type="hidden" name="cart[{{@index}}][product_id]" value="{{this.product_id}}">
+					<td class="item-image">
+						<img src="{{this.images}}" class="">
+					</td>
+					<td class="item-name">{{this.name}}</td>
+					<td type="number" class="item-quantity"/><input type="number" name="cart[{{@index}}][product_quantity]" value="{{this.product_quantity}}"></td>
+					<td class="item-price">{{this.price}}</td>
+					<td class="item-totalprice">{{this.totalprice}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		<div class="d-flex my-auto ml-auto">
+			<input class="shopBtn mr-2" type="submit" value="Cập nhật">
+			<a class="shopBtn" href="/order/new">Đặt hàng</a>
+		</div>
+	</div>
+</form>

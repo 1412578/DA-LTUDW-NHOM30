@@ -1,5 +1,6 @@
 var express = require('express');
 var userRepo = require('../repos/userRepo');
+var cartRepo = require('../repos/cartRepo');
 var bcrypt = require('bcrypt');
 var moment = require('moment');
 const saltRounds = 10;
@@ -75,12 +76,36 @@ function update(req, res, next){
 }
 
 function cart(req, res, next){
-	res.render("user/cart", {layout: "layout_user"});
+	cartRepo.load(req.session.username).then((rows)=>{
+		res.locals.cart = rows;
+		res.locals.cart.forEach(el=>el.totalprice = el.product_quantity * el.price);
+		res.render("user/cart", {layout: "layout_user", "msg": req.query.msg});
+	})
+	.catch(err=>{
+		next(err);
+	});
+}
+
+function cart_update(req, res, next){
+	var cart = req.body.cart;
+	var updateCartPromises = [];
+	cart.forEach(el=>{
+		updateCartPromises.push(cartRepo.save(req.session.username, el.product_id, el.product_quantity));
+	});
+	Promise.all(updateCartPromises).then(values=>{
+		res.redirect("/user/cart?msg=Đã cập nhật thành công");
+	})
+	.catch(err=>{
+		next(err);
+	});
 }
 
 function history(req, res, next){
 	res.render("user/history", {layout: "layout_user"});
 }
 
-module.exports =  {"show": show, "create": create, "info": info, "cart": cart, "update": update, "history": history};
+module.exports =  {
+	"show": show, "create": create, "info": info, "cart": cart,
+	"update": update, "history": history, "cart_update": cart_update
+};
 
