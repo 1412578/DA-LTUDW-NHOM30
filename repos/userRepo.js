@@ -14,10 +14,10 @@ exports.check = username =>{
 	return db.load(sql);
 }
 exports.load = username =>{
-	var sql = `SELECT username, email, name, address, gender, birthday, phone FROM user WHERE username = '${username}'`;
+	var sql = `SELECT id, username, email, name, address, gender, birthday, phone FROM user WHERE username = '${username}'`;
 	return db.load(sql);
 }
 exports.findByUsername = username => {
-	var sql = `select name, password from user where username = '${username}'`;
+	var sql = `select id, name, password from user where username = '${username}'`;
 	return db.load(sql);
 }

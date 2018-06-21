@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "mocha",
+    "debug": "set DEBUG=doan:server&& node ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

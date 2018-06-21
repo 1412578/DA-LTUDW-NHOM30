@@ -1,6 +1,7 @@
 var express = require('express');
 var userRepo = require('../repos/userRepo');
 var cartRepo = require('../repos/cartRepo');
+var applicationError = require('../fn/applicationError');
 var bcrypt = require('bcrypt');
 var moment = require('moment');
 const saltRounds = 10;
@@ -47,13 +48,10 @@ function create(req, res, next){
 function info(req, res, next){
 	var user = {};
 	userRepo.load(req.session.username).then(rows=>{
-		if (rows.length > 0){
 			user = rows[0];
 			user.birthday = moment(user.birthday).format("YYYY-MM-DD");
 			res.render("user/profile", {layout: "layout_user", "user": user, "msg": req.query.msg});
-		}
-		else
-			throw new Error("Tài khoản không tồn tại");
+	
 	}).catch(error=>{
 		next(error);
 	});
@@ -88,6 +86,8 @@ function cart(req, res, next){
 
 function cart_update(req, res, next){
 	var cart = req.body.cart;
+	if (cart == null)
+		throw applicationError("CART_EMPTY");
 	var updateCartPromises = [];
 	cart.forEach(el=>{
 		updateCartPromises.push(cartRepo.save(req.session.username, el.product_id, el.product_quantity));

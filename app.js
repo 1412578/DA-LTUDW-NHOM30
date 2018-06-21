@@ -7,6 +7,7 @@ var logger = require('morgan');
 var routes = require('./routes/routes.js');
 var session = require('express-session');
 var sessionPassData = require("./middle-wares/sessionPassData");
+var applicationErrorHandler = require("./middle-wares/applicationErrorHandler");
 
 var app = express();
 
@@ -53,6 +54,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+app.use(applicationErrorHandler);
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

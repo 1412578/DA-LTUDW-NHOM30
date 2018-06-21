@@ -14,3 +14,7 @@ exports.save = (username, product_id, product_quantity) => {
 				WHERE product_id = ${product_id} AND user_id = (SELECT id FROM user WHERE username = '${username}')`;
 	return db.save(sql);
 }
+exports.deleteAll = (user_id)=>{
+	var sql = `DELETE FROM cart WHERE user_id = '${user_id}'`;
+	return db.save(sql);
+}

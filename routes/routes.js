@@ -49,6 +49,7 @@ module.exports = {
 		var router = express.Router();
 
 		router.get('/new', orders.newOrder);
+		router.post('/create', orders.create);
 
 		return router;
 	},
