@@ -7,8 +7,9 @@ var categories = require("../controller/categories");
 var vendors = require("../controller/vendors");
 var admin = require("../controller/admin");
 var orders = require("../controller/orders");
+var csrf = require('csurf');
 var restrict = require('../middle-wares/restrictAccess');
-
+var csrfProtection = csrf();
 module.exports = {
 	"index": function(){
 		var router = express.Router();
@@ -20,6 +21,7 @@ module.exports = {
 	"users": function(){
 		var router = express.Router();
 
+		router.use(csrfProtection);
 		router.get('/new', restrict.guest, users.show);
 		router.post('/create', restrict.guest, users.create);
 		router.get('/info', restrict.user, users.info);
@@ -48,6 +50,7 @@ module.exports = {
 	"orders": function(){
 		var router = express.Router();
 
+		router.use(csrfProtection);
 		router.get('/new', orders.newOrder);
 		router.post('/create', orders.create);
 

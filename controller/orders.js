@@ -24,7 +24,7 @@ function newOrder(req, res, next){
 		res.locals.info.receiver_email = userInfo.email;
 		res.locals.info.cart = cart;
 
-		res.render("order/new");
+		res.render("order/new", {csrfToken: req.csrfToken()});
 	})
 	.catch(error=>{
 		next(error);

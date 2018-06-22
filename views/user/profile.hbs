@@ -6,6 +6,7 @@
 </div>
 {{/if}}
 <form method="post" action="/user/update">
+	<input type="hidden" name="_csrf" value="{{csrfToken}}">
 	<div class="form-group">
 		<label for="name">Họ tên</label>
 		<input class="form-control" id="name" name="name" type="text" value="{{user.name}}"/>

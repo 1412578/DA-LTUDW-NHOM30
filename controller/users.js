@@ -7,7 +7,7 @@ var moment = require('moment');
 const saltRounds = 10;
 
 function show(req, res, next){
-	res.render("user", {layout: "layout_no_sidebar", msg: req.query.msg});
+	res.render("user", {layout: "layout_no_sidebar", msg: req.query.msg, csrfToken: req.csrfToken()});
 }
 
 function create(req, res, next){
@@ -50,7 +50,7 @@ function info(req, res, next){
 	userRepo.load(req.session.username).then(rows=>{
 			user = rows[0];
 			user.birthday = moment(user.birthday).format("YYYY-MM-DD");
-			res.render("user/profile", {layout: "layout_user", "user": user, "msg": req.query.msg});
+			res.render("user/profile", {layout: "layout_user", "user": user, "msg": req.query.msg, csrfToken: req.csrfToken()});
 	
 	}).catch(error=>{
 		next(error);
@@ -77,7 +77,7 @@ function cart(req, res, next){
 	cartRepo.load(req.session.username).then((rows)=>{
 		res.locals.cart = rows;
 		res.locals.cart.forEach(el=>el.totalprice = el.product_quantity * el.price);
-		res.render("user/cart", {layout: "layout_user", "msg": req.query.msg});
+		res.render("user/cart", {layout: "layout_user", "msg": req.query.msg, csrfToken: req.csrfToken()});
 	})
 	.catch(err=>{
 		next(err);

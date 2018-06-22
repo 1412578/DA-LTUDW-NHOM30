@@ -4,6 +4,7 @@
 		<p>Quý khách vui lòng kiểm tra lại đầy đủ thông tin và nhấn nút "Đồng ý" để tiếp tục quá trình thanh toán</p>
 		<hr>
 		<form method="POST" action="/order/create">
+		<input type="hidden" name="_csrf" value="{{csrfToken}}">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
