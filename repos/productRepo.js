@@ -10,3 +10,9 @@ exports.updateInventoryNumber = function(id, inventory_number){
 	
 	return db.save(sql, this._connection);
 }
+exports.getInventoryNumber = function(id){
+	var sql = `SELECT inventory_number 
+				FROM product WHERE id = '${id}'`;
+	
+	return db.load(sql);
+}

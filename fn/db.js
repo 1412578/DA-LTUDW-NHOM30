@@ -63,7 +63,10 @@ MyTransaction.prototype.excute = function(fn){
 }
 
 MyTransaction.prototype.rollback = function(fn){
-    this._connection.rollback(fn);
+    this._connection.rollback(function(){
+        this._connection.end();
+        fn();
+    });
 }
 
 MyTransaction.prototype.commit = function(){
@@ -71,6 +74,7 @@ MyTransaction.prototype.commit = function(){
         this._connection.commit(function(err){
             if (err) reject(err);
             else resolve();
+            this._connection.end();
         });
     });
 }
