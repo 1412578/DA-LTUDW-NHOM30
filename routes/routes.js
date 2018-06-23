@@ -6,6 +6,7 @@ var sessions = require("../controller/sessions");
 var categories = require("../controller/categories");
 var vendors = require("../controller/vendors");
 var admin = require("../controller/admin");
+var orders = require("../controller/orders");
 var restrict = require('../middle-wares/restrictAccess');
 
 module.exports = {
@@ -24,6 +25,7 @@ module.exports = {
 		router.get('/info', restrict.user, users.info);
 		router.post('/update', restrict.user, users.update);
 		router.get('/cart', restrict.user, users.cart);
+		router.post('/cart/update', restrict.user, users.cart_update);
 		router.get('/history', restrict.user, users.history);
 		
 		return router;
@@ -40,6 +42,13 @@ module.exports = {
 		var router = express.Router();
 
 		router.get('/:id', products.show);
+
+		return router;
+	},
+	"orders": function(){
+		var router = express.Router();
+
+		router.get('/new', orders.newOrder);
 
 		return router;
 	},

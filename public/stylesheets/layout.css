@@ -170,4 +170,10 @@ body{
 	color: white;
 }
 
-
+/* cart.hbs */
+.item-image{
+	width: 100px;
+}
+.item-image img{
+	max-width: 100%;
+}
