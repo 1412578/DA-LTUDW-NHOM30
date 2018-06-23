@@ -103,7 +103,7 @@ function createOrder(req, res, next){
 		var seqPromises =
 			updateList.map(el => updateInventoryNumberWrapper(el.id, el.inventory_number));
 
-		return seqPromises.reduce((a,b) => a.then(transaction.excute(b)), Promise.resolve());
+		return seqPromises.reduce((a,b) => a.then(()=>transaction.excute(b)), Promise.resolve());
 	})
 	.then(results=>{
 		debug("Commit");
