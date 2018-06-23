@@ -8,9 +8,13 @@ exports.load = username => {
 			   WHERE user.username = '${username}'`;
 	return db.load(sql);
 }
-exports.save = (username, product_id, product_quantity) => {
+exports.save = function saveCart(username, product_id, product_quantity) {
 	var sql = `UPDATE cart 
 				SET product_quantity = ${product_quantity}
 				WHERE product_id = ${product_id} AND user_id = (SELECT id FROM user WHERE username = '${username}')`;
-	return db.save(sql);
+	return db.save(sql, this._connection);
+}
+exports.deleteAll = function deleteAllCart(user_id){
+	var sql = `DELETE FROM cart WHERE user_id = '${user_id}'`;
+	return db.save(sql, this._connection);
 }

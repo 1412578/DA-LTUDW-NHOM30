@@ -1,68 +1,64 @@
-<div class="offset-sm-3 col-sm-6">
+<div class="col-sm-12">
 	<div class="order-box">
 		<h3>Tạo đơn hàng</h3>
-		<p>Dưới đây là thông tin của đơn hàng mà quý khách chuẩn bị tạo, vui lòng kiểm tra lại đầy đủ và nhấn nút "Đồng ý" để tiếp tục quá trình thanh toán</p>
+		<p>Quý khách vui lòng kiểm tra lại đầy đủ thông tin và nhấn nút "Đồng ý" để tiếp tục quá trình thanh toán</p>
+		<hr>
 		<form method="POST" action="/order/create">
-			<div class="form-group">
-				<label for="buyer-name">Người đặt</label>
-				<input id="buyer-name" class="form-control-plaintext" type="text" value="Trần Quang Trí" readonly>
-			</div>
-			<div class="form-group">
-				<label for="buyer-name">Người nhận</label>
-				<input id="buyer-name" class="form-control" type="text" value="Trần Quang Trí">
-			</div>
-			<div class="form-group">
-				<label for="buyer-name">SĐT Người nhận</label>
-				<input id="buyer-name" class="form-control" type="text" value="0913937660">
-			</div>
-			<div class="form-group">
-				<label for="buyer-name">Email Người nhận</label>
-				<input id="buyer-name" class="form-control" type="text" value="tranquangtri96@gmail.com">
-			</div>
-			<div class="form-group">
-				<label for="buyer-name">Địa chỉ nhận hàng</label>
-				<input id="buyer-name" class="form-control" type="text" value="171 Phan Đăng Lưu">
-			</div>
-			<div class="form-group">
-				<label for="buyer-name">Chi tiết đơn hàng</label>
-				<table class="table">
-					<thead class="header">
-						<tr>
-							<th>Hình ảnh</th>
-							<th>Tên sản phẩm</th>
-							<th>Số lượng</th>
-							<th>Giá</th>
-							<th>Tổng giá</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>...</td>
-							<td>Henessy</td>
-							<td>12</td>
-							<td>10000</td>
-							<td>100000</td>
-						</tr>
-						<tr>
-							<td>...</td>
-							<td>Henessy</td>
-							<td>12</td>
-							<td>10000</td>
-							<td>100000</td>
-						</tr>
-						<tr>
-							<td>...</td>
-							<td>Henessy</td>
-							<td>12</td>
-							<td>10000</td>
-							<td>100000</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="form-group">
-				<label>Tổng tiền</label>
-				<input type="text" class="form-control-plaintext" value="1200000">
+		<input type="hidden" name="_csrf" value="{{csrfToken}}">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="buyer-name">Người đặt</label>
+						<input id="buyer-name" class="form-control-plaintext" type="text" value="{{info.buyer_name}}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="buyer-name">Người nhận</label>
+						<input id="buyer-name" class="form-control" type="text" name="receiver_name" value="{{info.receiver_name}}" required>
+					</div>
+					<div class="form-group">
+						<label for="buyer-name">SĐT Người nhận</label>
+						<input id="buyer-name" class="form-control" type="text" name="receiver_phone" value="{{info.receiver_phone}}" required>
+					</div>
+					<div class="form-group">
+						<label for="buyer-name">Email Người nhận</label>
+						<input id="buyer-name" class="form-control" type="text" name="receiver_email" value="{{info.receiver_email}}" required>
+					</div>
+					<div class="form-group">
+						<label for="buyer-name">Địa chỉ nhận hàng</label>
+						<input id="buyer-name" class="form-control" type="text" name="receiver_address" value="{{info.receiver_address}}" required>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="buyer-name">Chi tiết đơn hàng</label>
+						<table class="table">
+							<thead class="header">
+								<tr>
+									<th>Hình ảnh</th>
+									<th>Tên sản phẩm</th>
+									<th>Số lượng</th>
+									<th>Giá</th>
+									<th>Tổng giá</th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#each info.cart.items}}
+								<tr>
+									<td class="item-image"><img src="{{this.images}}"></td>
+									<td>{{this.name}}</td>
+									<td>{{this.product_quantity}}</td>
+									<td>{{this.price}}</td>
+									<td>{{this.totalPrice}}</td>
+								</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+					<div class="form-group">
+						<label>Tổng tiền</label>
+						<input type="text" class="form-control-plaintext" value="{{info.cart.totalCost}}">
+					</div>
+				</div>
 			</div>
 			<div class="form-group">
 				<input type="submit" value="Đặt hàng" class="btn btn-primary">
