@@ -88,131 +88,20 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					    	<!-- Loại Brandy-->
-					      <tr>
-					        <td>St Remy Napoleon</td>
-					        <td>Brandy</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
-
-					      <tr>
-					        <td>Napoleon Dumas</td>
-					        <td>Branky</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
-
-					      <tr>
-					        <td>Louis Chevallier</td>
-					        <td>Branky</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
-
-					      <tr>
-					        <td>Raynal</td>
-					        <td>Branky</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
-
-					      <!--Loại Whisky-->
-					       <tr>
-					        <td>Scotch Whisky</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
-
-					      <tr>
-					        <td>American Whiskey</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
-
-					      <tr>
-					        <td>Canadian Whisky</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
-
-					      <tr>
-					        <td>Irish Whiskey.</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
-
-					      <!-- Loaijk Rhum -->
-
-					      <tr>
-					        <td>Rhum Puerto Rico</td>
-					        <td>Rhum</td>
-					        <td>john@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Rhum Jamaica</td>
-					        <td>Rhum</td>
-					        <td>mary@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Rhum Demeraran</td>
-					        <td>Rhum</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Rhum Martinique</td>
-					        <td>Rhum</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <!-- Loại Vodka -->
-					      <tr>
-					        <td>Smirnoff</td>
-					        <td>Vodka</td>
-					        <td>john@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Absolut</td>
-					        <td>Vodka</td>
-					        <td>mary@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Stolichnaya</td>
-					        <td>Vodka</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Finlandia</td>
-					        <td>Vodka</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-						<!-- Loại Gin -->
-						<tr>
-					        <td>LondonDryGin</td>
-					        <td>Gin</td>
-					        <td>john@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>AmericanDryGin</td>
-					        <td>Gin</td>
-					        <td>mary@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>GeneverGin</td>
-					        <td>Gin</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>OldTomGin</td>
-					        <td>Gin</td>
-					        <td>july@example.com</td>
-					      </tr>
+					    	{{#each data.products}}
+						       <tr>
+						       	<td>
+						       		{{this.name}}
+						       	</td>
+						       	<td>
+						       		{{this.category}}
+						       	</td>
+						       	<td>
+						       		{{this.maker}}
+						       	</td>
+						       </tr>
+						      
+						    {{/each}}
 
 					    </tbody>
 					  </table>
@@ -230,9 +119,28 @@
 					      </tr>
 					    </thead>
 
-					    <tbody>
-
-						<tr id = 'DoiMau'>
+					    <tbody >
+							 {{#each data.orders}}
+								<tr class="{{this.status_TT}}">
+									<td>
+									{{this.id}}
+									</td>
+									<td>
+										{{this.order_datetime}}
+									</td>
+									<td>
+										{{this.receiver_name}}
+									</td>
+									<td>
+										{{this.cost}}
+									</td>
+									<td>
+										{{this.status_name}}
+									</td>
+								</tr>
+							{{/each}}
+								
+						<!-- <tr id = 'DoiMau'>
 					       <td>1512445</td>
 					        <td>05/07/200</td>
 					        <td>LondonDryGin</td>
@@ -303,7 +211,7 @@
 							    </div>
 							  </form>
 					        </td>
-					      </tr>
+					      </tr> -->
 
 				    	</tbody>
   					 </table>
