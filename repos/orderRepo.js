@@ -1,6 +1,7 @@
 var db = require('../fn/db');
+var debug = require('debug')('doan:server');
 
-exports.add = order => {
+exports.add = function addOrder(order){
 	var sql = 	`insert into 
 								\`order\`(
 										order_datetime, 
@@ -21,6 +22,5 @@ exports.add = order => {
 									'${order.receiver_email}', 
 									'${order.cost}', 
 									'${order.user_id}')`;
-	console.log(sql);
-	return db.save(sql);
+	return db.save(sql, this._connection);
 }

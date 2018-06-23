@@ -6,6 +6,7 @@ var cartRepo = require('../repos/cartRepo');
 var orderRepo = require('../repos/orderRepo');
 var productRepo = require('../repos/productRepo');
 var orderDetailsRepo = require('../repos/orderDetailsRepo');
+var db = require('../fn/db');
 var moment = require('moment');
 
 function newOrder(req, res, next){
@@ -32,6 +33,7 @@ function newOrder(req, res, next){
 
 }
 
+
 function createOrder(req, res, next){
 	var order = {
 		"id": 0,
@@ -43,52 +45,79 @@ function createOrder(req, res, next){
 		"order_datetime": new moment.utc().format("YYYY-MM-DD HH-mm-ss"),
 		"status": "CHECKOUT"
 	};
-	var cart = {};
+	var transaction = null;
+	var cart = {items: null};
+	
 	cartRepo.load(req.session.username).then(rows=>{
-		if (rows.length == 0) 
-			throw applicationError("CART_EMPTY");
+		if (rows.length == 0) throw applicationError("CART_EMPTY");
+
 		cart.items = rows;
 
-		// Update inventory number of products in transaction
-		var inventoryUpdates = [];
-		cart.items.forEach(el=>{
-			inventoryUpdates.push({
-				"id": el.product_id,
-				"inventory_number": el.inventory_number - el.product_quantity
-			})
-		});
-		return productRepo.updateInventoryNumber(inventoryUpdates);
+		// Begin createOrder transaction
+		debug("Begin transaction");
+		transaction = new db.MyTransaction();
+		return transaction.begin();
 	})
 	.then(()=>{
-		debug("Check inventory successfully");
+		debug("Create order");
 		// Create Order
-		order.cost = cart.items.reduce((a,b) => a.product_quantity * a.price + b.product_quantity * b.price);
-		return orderRepo.add(order);
+		order.cost = cart.items.reduce((a,b) => 
+			a.product_quantity * a.price + b.product_quantity * b.price);
+
+		return transaction.excute(orderRepo.add, order);
 	})
 	.then(results=>{
-		debug("Create order successfully");
+		debug("Create order details");
 		// Create Order Details
 		order.id = results.insertId;
 		var orderDetailsPromises = [];
-		var orderDetails;
+		var orderDetails = {};
 		cart.items.forEach(el=>{
 			orderDetails = {
 				"order_id": order.id,
 				"product_id": el.product_id,
 				"number": el.product_quantity
 			}
-			orderDetailsPromises.push(orderDetailsRepo.add(orderDetails));
+			orderDetailsPromises.push(transaction.excute(orderDetailsRepo.add, orderDetails));
 		});
 		return Promise.all(orderDetailsPromises);
 	})
 	.then(results=>{
-		return cartRepo.deleteAll(req.session.user_id);
+		return transaction.excute(cartRepo.deleteAll, req.session.user_id);
+	})
+	.then(()=>{
+
+		/* Update multi inventory number */
+		var updateInventoryNumberWrapper = function(id, inventory_number){
+			return function() {
+				return productRepo.updateInventoryNumber.call(this, id, inventory_number);
+			}
+		};
+
+		var updateList = 
+			cart.items.map(item => ({ 
+					"id": item.product_id,
+					"inventory_number": item.inventory_number - item.product_quantity
+				}));
+		
+		var seqPromises =
+			updateList.map(el => updateInventoryNumberWrapper(el.id, el.inventory_number));
+
+		return seqPromises.reduce((a,b) => a.then(transaction.excute(b)), Promise.resolve());
+	})
+	.then(results=>{
+		debug("Commit");
+		return transaction.commit();
 	})
 	.then(results=>{
 		res.redirect("/?msg=Đã tạo đơn hàng thành công");
 	})
 	.catch(err=>{
-		next(err);
+		debug("catch:" + err);
+		transaction.rollback(()=>{
+			debug("rollback");
+			next(err);
+		});
 	});
 }
 
