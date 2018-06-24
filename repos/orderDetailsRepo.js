@@ -9,7 +9,7 @@ exports.getOrderDetailsByOrderId = function getOrderDetailsByOrderId(id, options
 	let sql = `	SELECT product_id, number
 				FROM order_details
 				WHERE order_id = ${id}`;
-	let sqljoin = `	SELECT product_id, number, name, images, price
+	let sqljoin = `	SELECT product_id, number, name, images, order_details.price
 					FROM order_details 
 					JOIN product ON order_details.product_id = product.id
 					WHERE order_id = ${id}`;
