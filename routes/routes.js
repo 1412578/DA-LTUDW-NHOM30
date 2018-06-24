@@ -52,6 +52,7 @@ module.exports = {
 
 		router.use(csrfProtection);
 		router.get('/new', orders.newOrder);
+		router.get('/:id', orders.show);
 		router.post('/create', orders.create);
 
 		return router;

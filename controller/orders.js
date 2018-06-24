@@ -121,5 +121,23 @@ function createOrder(req, res, next){
 	});
 }
 
-module.exports =  {"newOrder": newOrder, "create": createOrder};
+function showOrder(req, res, next){
+	let order = {};
+	orderRepo.checkOrderById(req.params.id, req.session.user_id).then(rows=>{
+		if (rows <= 0) throw applicationError("DENY_VIEW_ORDER");
+		return orderRepo.getOrderById(req.params.id);
+	})
+	.then(rows=>{
+		order = rows[0];
+		return orderDetailsRepo.getOrderDetailsByOrderId(order.id, {includeProduct: true});
+	})
+	.then(rows=>{
+		order.items = rows;
+		rows.forEach(item => item.totalPrice = item.price * item.number);
+		res.render("order/show", {info: order});
+	})
+	.catch(err => next(err));
+}
+
+module.exports =  {"newOrder": newOrder, "create": createOrder, "show": showOrder};
 
