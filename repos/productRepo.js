@@ -16,3 +16,11 @@ exports.getInventoryNumber = function(id){
 	
 	return db.load(sql);
 }
+exports.getProductById = function(id){
+	let sql = `	SELECT name, images, 
+					price, description,
+					origin, category, 
+					maker, inventory_nunmber
+				FROM product WHERE id = ${id}`;
+	return db.load(sql);
+}
