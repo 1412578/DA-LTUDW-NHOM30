@@ -1,6 +1,7 @@
 var express = require('express');
 var userRepo = require('../repos/userRepo');
 var cartRepo = require('../repos/cartRepo');
+var orderRepo = require('../repos/orderRepo');
 var applicationError = require('../fn/applicationError');
 var bcrypt = require('bcrypt');
 var moment = require('moment');
@@ -101,7 +102,16 @@ function cart_update(req, res, next){
 }
 
 function history(req, res, next){
-	res.render("user/history", {layout: "layout_user"});
+	let sortMode = "DESC";
+	if (req.query.sort == "ASC")
+		sortMode = "ASC";
+	res.locals.sortMode = sortMode;
+	orderRepo.getOrdersByUserId(req.session.user_id, {"sortMode": sortMode}).then(rows=>{
+		res.locals.items = rows;
+		rows.forEach(i=>i.order_datetime = i.order_datetime.toUTCString());
+		res.render("user/history", {layout: "layout_user"});
+	})
+	.catch(err => next(err));
 }
 
 module.exports =  {

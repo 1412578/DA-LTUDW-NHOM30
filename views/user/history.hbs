@@ -1,20 +1,19 @@
+<script>
+	moment.locale("vi");
+</script>
 <h5>LỊCH SỬ MUA HÀNG</h5>
 <hr class="soften">
 <div class="content">
+	{{#if items}}
 	<section class="history">
-		<div class="btn-group btn-group-toggle" data-toggle="buttons">
-		  <label class="btn btn-outline-dark">
-		    <input type="radio" name="gender" id="option1" autocomplete="off" value="male"> Đã về hàng
-		  </label>
-		  <label class="btn btn-outline-dark">
-		    <input type="radio" name="gender" id="option2" autocomplete="off" value="female"> Đang xét duyệt
-		  </label>
-		  <label class="btn btn-outline-dark">
-		    <input type="radio" name="gender" id="option3" autocomplete="off" value="other">  Đã hủy
-		  </label>
-		  <label class="btn btn-outline-dark">
-		    <input type="radio" name="gender" id="option3" autocomplete="off" value="other">  Tất cả
-		  </label>
+		</div>
+		<div class="btn-group">
+		  <a class="btn btn-outline-dark {{#if_eq sortMode 'DESC'}} active{{/if_eq}}" href="?sort=DESC">
+		    Mới nhất
+		  </a>
+		  <a class="btn btn-outline-dark {{#if_eq sortMode 'ASC'}} active{{/if_eq}}" href="/user/history?sort=ASC">
+		    Cũ nhất
+		  </a>
 		</div>
 		<table class="table history-list">
 			<thead class="history-item">
@@ -26,25 +25,24 @@
 				</tr>
 			</thead>
 			<tbody>
+				{{#each items}}
 				<tr class="history-item">
-					<td href="order_details.html" class="item-code">A01-SG19</td>
-					<td class="item-totalprice">120.000 VNĐ</td>
-					<td class="item-status paid">Hàng đã về</td>
-					<td class="item-date">11-09-2017</td>
+					<td class="item-code"><a href="/order/{{this.id}}">{{this.id}}</a></td>
+					<td class="item-totalprice">{{this.cost}} VNĐ</td>
+					<td class="item-status paid">{{this.status}}</td>
+					<td class="item-date">
+						<noscript>{{this.order_datetime}} UTC</noscript>
+						<script>
+							document.write(moment.utc("{{this.order_datetime}}").local().format("LLL"));
+						</script>
+					</td>
 				</tr>
-				<tr class="history-item">
-					<td class="item-code">A01-SG16</td>
-					<td class="item-totalprice">8.625.000 VNĐ</td>
-					<td class="item-status canceled">Đã hủy</td>
-					<td class="item-date">20-05-2017</td>
-				</tr>
-				<tr class="history-item">
-					<td class="item-code">A01-SG12</td>
-					<td class="item-totalprice">380.000 VNĐ</td>
-					<td class="item-status">Chờ nhận hàng</td>
-					<td class="item-date">21-01-2017</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</section>
+	{{else}}
+		<p class="mt-2">
+		Không có lịch sử đơn hàng</p>
+	{{/if}}
 </div>

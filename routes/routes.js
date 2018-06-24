@@ -51,7 +51,9 @@ module.exports = {
 		var router = express.Router();
 
 		router.use(csrfProtection);
+		router.use(restrict.user);
 		router.get('/new', orders.newOrder);
+		router.get('/:id', orders.show);
 		router.post('/create', orders.create);
 
 		return router;
