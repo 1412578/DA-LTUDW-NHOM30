@@ -16,3 +16,21 @@ exports.getInventoryNumber = function(id){
 	
 	return db.load(sql);
 }
+
+exports.limitNewestProduct = function(limit){
+	var sql = `	SELECT id, name, images, price 
+				FROM product ORDER BY datetime DESC LIMIT ${limit}`;
+	return db.load(sql);
+}
+
+exports.limitMostSoldProduct = function(limit){
+	var sql = `	SELECT id, name, images, price 
+				FROM product ORDER BY sold DESC LIMIT ${limit}`;
+	return db.load(sql);
+}
+
+exports.limitMostViewProduct = function(limit){
+	var sql = `	SELECT id, name, images, price 
+				FROM product ORDER BY view DESC LIMIT ${limit}`;
+	return db.load(sql);
+}

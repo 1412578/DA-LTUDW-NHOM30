@@ -177,3 +177,10 @@ body{
 .item-image img{
 	max-width: 100%;
 }
+/* 1/5 grid */
+.col-2m4{
+	width: 20%;
+	max-width: 20%;
+	padding-right: 15px;
+	padding-left: 15px;
+}
