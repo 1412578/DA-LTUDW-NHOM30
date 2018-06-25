@@ -37,7 +37,7 @@ https://drive.google.com/file/d/11C3-q0k7mwwhds0Ghcfis92iE3iJ4Ux_/view
   * [x] Xem theo loại
   * [x] Xem theo nhà sản xuất
   * [x] Hỗ trợ phân trang
-* [x] **1.4 Xem chi tiết sản phẩm**
+* [x] **1.4 Xem chi tiết sản phẩm** [1512667]
   * [x] Hiển thị các thông tin sau
     * [x] Hình ảnh
     * [x] Giá bán
@@ -49,9 +49,9 @@ https://drive.google.com/file/d/11C3-q0k7mwwhds0Ghcfis92iE3iJ4Ux_/view
     * [x] Nhà sản xuất
     * [x] 5 sản phẩm cùng loại
     * [x] 5 sản phẩẩm cùng nhà sản xuất
-* [x] **1.5 Tìm kiếm sản phẩm**
-  * [x] Cho phép tìm kiếm theo nhiều tiêu chí: tên, giá, loại, nhà sản xuất
-  * [x] Hỗ trợ phân trang
+* [ ] **1.5 Tìm kiếm sản phẩm** [1512667]
+  * [ ] Cho phép tìm kiếm theo nhiều tiêu chí: tên, giá, loại, nhà sản xuất
+  * [ ] Hỗ trợ phân trang
 * [x] **1.6 Đăng nhập**
 * [x] **1.7 Đăng ký**
   * [ ] Có sử dụng captcha
