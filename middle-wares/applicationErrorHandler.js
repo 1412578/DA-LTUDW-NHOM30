@@ -14,6 +14,9 @@ module.exports = function(err, req, res,next){
 
 		handlers["DENY_VIEW_ORDER"]	=
 			()=> res.redirect('/');
+
+		handlers["PRODUCT_NOT_EXIST"]	=
+			()=> res.redirect('/');
 		
 		if (handlers[err.applicationErrorId])
 			handlers[err.applicationErrorId]();
