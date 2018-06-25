@@ -1,5 +1,7 @@
 body{
 	background-color: white;
+	/*background: url("/images/bgr.svg") no-repeat;
+	background-size: 100vw;*/
 }
 @font-face{
 	font-family: "IBM Plex Serif";
@@ -176,4 +178,100 @@ body{
 }
 .item-image img{
 	max-width: 100%;
+}
+
+
+/* product/show */
+.product-buy-box{
+	display: flex;
+	flex-direction: column;
+}
+.product-buy-box .sub-box{
+	display: flex;
+	margin-top: 5px;
+}
+.product-buy-box .sub-box .status{
+	padding: 2px 5px;
+	font-size: 0.9rem;
+	border-radius: 3px;
+	font-weight: regular;
+	background-color: #414141;
+	color: white;
+}
+.product-buy-box > .title{
+	font-size: 1.6rem;
+}
+.product-buy-box .box{
+	margin-bottom: 10px;
+}
+.product-buy-box .box .title{
+	font-size: 0.9rem;
+	color: gray;
+}
+.product-buy-box .box .value{
+	font-size: 1.2rem;
+}
+.product-buy-box .price .value{
+}
+.product-buy-box .description{
+	margin-bottom: 20px;
+}
+.add-cart{
+	display: flex;
+	flex-direction: column;
+	margin-top: auto;
+}
+.add-cart .quantity-control{
+	display: flex;
+}
+.add-cart .quantity-control input{
+	overflow: hidden;
+	flex-grow: 1;
+	flex-shrink: 0;
+	outline: none;
+	border: solid 1px gray;
+	text-align: center;
+	transition: border 0.2s ease-in-out;
+	width: 15%;
+}
+.add-cart .quantity-control input:hover{
+	border-color: black;
+}
+
+.add-cart .quantity-control button{
+	border: solid 1px gray;
+	background-color: white;
+	display: flex;
+	padding: 6px 9px;
+	transition: border 0.2s ease-in-out;
+	outline: none;
+	flex-grow: 1;
+	justify-content: center;
+}
+.add-cart .quantity-control button:hover{
+	border-color: black;
+}
+.add-cart .quantity-control button:focus{
+	border-color: black;
+}
+.add-cart .quantity-control #increase{
+	margin-left:-1px;
+}
+.add-cart .quantity-control #decrease{
+	margin-right: -1px;
+}
+.add-cart .quantity-control svg{
+	width: 10px;
+	height: 10px;
+}
+.add-cart .cart-button{
+	margin-top: 10px;
+	padding: 3px;
+	outline: none;
+	border: solid 1px gray;
+	background-color: white;
+	transition: border 0.2s ease-in-out;
+}
+.add-cart .cart-button:focus, .add-cart .cart-button:hover{
+	border-color: black;
 }

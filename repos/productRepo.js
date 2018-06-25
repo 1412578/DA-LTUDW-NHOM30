@@ -20,7 +20,8 @@ exports.getProductById = function(id){
 	let sql = `	SELECT name, images, 
 					price, description,
 					origin, category, 
-					maker, inventory_nunmber
+					maker, inventory_number, datetime, 
+					sold, view, category_id, vendor_id
 				FROM product WHERE id = ${id}`;
 	return db.load(sql);
 }
