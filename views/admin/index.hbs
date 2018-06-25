@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style type="text/css">
-  	body{
-  		margin: 10px;
-  	}
-  </style>
-  <link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style type="text/css">
+	body{
+		margin: 10px;
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body >
 	<div class="container">
@@ -19,298 +19,371 @@
 			<!-- Danh mục chức năng-->
 			<div class="col-md-4">
 				<ul class="nav navbar-link">
+					<li >
+						<a data-toggle="tab" href="#QLSPNSX"> 
+							<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspQuản Lí Danh Mục Sản Phẩm
+						</a>
+					</li>
 
-				    <li >
-				    	<a data-toggle="tab" href="#ThongTinTaiKhoan"> 
-				    		<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspThông tin tài khoản
-				    	</a>
-				    </li>
+					<li >
+						<a data-toggle="tab" href="#QLNG"> 
+							<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspQuản Lí nguồn gốc sản phẩm
+						</a>
+					</li>
+					<li >
+						<a data-toggle="tab" href="#ThongTinTaiKhoan"> 
+							<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspChỉnh Sửa Sản Phẩm
+						</a>
+					</li>
 
-				    
+
 					<li>
-				    	<a data-toggle="tab" href="#QuanLySanPham"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspQuản lí sản phẩm</a>
-				    </li>
+						<a data-toggle="tab" href="#QuanLySanPham"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspNơi Quản lí sản phẩm</a>
+					</li>
 
 
-				    <li>
-				    	<a data-toggle="tab" href="#QuanLiDonHang"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspQuản lí Đơn hàng</a>
-				    </li>
+					<li>
+						<a data-toggle="tab" href="#QuanLiDonHang"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspNơi Quản lí Đơn hàng</a>
+					</li>
 				</ul>
 			</div>
 
 
 
 			<div class="tab-content col-md-8"> 
-				    <div id="ThongTinTaiKhoan" class="tab-pane fade">
-					 <div class="col-md-6">
-					 	<h3 style="color: #00bfff;">Thêm sản phẩm</h3>
-					 	<form>
-						    <div class="form-group">
-						      <label for="usr">Tên sản phẩm:</label>
-						      <input type="text" class="form-control" id="usr" placeholder="Nhập tên sản phẩm">
-						    </div>
-						    <div class="form-group">
-						      <label for="pwd">Loại sản phẩm:</label>
-						      <input type="text" class="form-control" id="pwd" placeholder="Nhập loại sản phẩm">
-						    </div>
-						    <div class="form-group">
-						      <label for="pwd">Nhà sản xuất:</label>
-						      <input type="text" class="form-control" id="pwd" placeholder="Nhập nhà sản xuất">
-						    </div>
-						    <div class="form-group">
-						      <button type="button" class="btn btn-success btn-block">Thêm sản phẩm</button>
-						    </div>
-						  </form>
-					 </div>
-					 	
-					 <div class="col-md-6">
-					 <h3 style="color: #00bfff;">Xóa sản phẩm</h3>
-					    <form>
-						    <div class="form-group">
-						      <label for="usr">Xóa theo tên:</label>
-						      <input type="text" class="form-control" id="usr" placeholder="Tên sản phẩm muốn xóa">
-						    </div>
-						    <div class="form-group">
-						      <button type="button" class="btn btn-warning btn-block">Xóa sản phẩm</button>
-						    </div>
-				        </form>
+				<div id= "QLSPNSX" class="tab-pane fade">
+					<div class="col-md-6">
+						<h3 style="color: #00bfff;">Thêm Danh Mục Sản Phẩm</h3>
+						<form action="/admin/category" method="POST">
+							<div class="form-group">
+								<label>Nhập ID danh mục:</label>
+								<input type="text" class="form-control" name="category_id" placeholder="ID Danh Mục" disabled>
+								<label>Nhập tên danh mục:</label>
+								<input type="text" class="form-control" name ="category_name" placeholder="Tên Danh Mục">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success btn-block">Thêm</button>
+							</div>
+						</form>
 					</div>
 
+					<div class="col-md-6">
+						<h3 style="color: #00bfff;">Xóa Danh Mục</h3>
+						<form>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID Danh Mục</th>
+										<th>Tên Danh Mục</th>
+										<th>Xóa</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#each data.categories}}
+									<tr>
+										<td>{{this.id}}</td>
+										<td>{{this.category_name}}</td>
+										<td>
+											<button type="button" class="btn-delete_category btn btn-warning glyphicon glyphicon-remove" category_id = "{{this.id}}"></button>
+										</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div >
+
+				<div id= "QLNG" class="tab-pane fade">
+					<div class="col-md-6">
+						<h3 style="color: #00bfff;">Thêm Nơi xuất xứ</h3>
+						<form action="/admin/vendor" method="POST">
+							<div class="form-group">
+								<label>Nhập ID nơi xuất xứ:</label>
+								<input type="text" class="form-control" placeholder="ID Xuât Xứ" disabled>
+								<label>Nhập tên xuất xứ:</label>
+								<input type="text" class="form-control" name="vendor_name"  placeholder="Tên Xuất Xứ">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success btn-block">Thêm</button>
+							</div>
+						</form>
 					</div>
 
-				    <div id="QuanLySanPham" class="tab-pane fade">
-				      <table class="table">
-					    <thead>
-					      <tr>
-					        <th>Sản Phẩm</th>
-					        <th>Loại Sản Phẩm</th>
-					        <th>Nhà Sản Xuất</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					    	<!-- Loại Brandy-->
-					      <tr>
-					        <td>St Remy Napoleon</td>
-					        <td>Brandy</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
+					<div class="col-md-6">
+						<h3 style="color: #00bfff;">Xóa Nơi Xuất sứ</h3>
+						<form>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID Xuất Xứ</th>
+										<th>Tên Xuất Xứ</th>
+										<th>Xóa</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#each data.vendors}}
+									<tr>
+										<td>{{this.id}}</td>
+										<td>{{this.vendor_name}}</td>
+										<td>
+											<button type="button" class=" btn btn-warning glyphicon glyphicon-remove btn-delete_vendor" vendor_id = "{{this.id}}"></button>
+										</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div >
 
-					      <tr>
-					        <td>Napoleon Dumas</td>
-					        <td>Branky</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
+				<div id="ThongTinTaiKhoan" class="tab-pane fade">
+					<div class="col-md-6">
+						<h3 style="color: #00bfff;">Thêm sản phẩm</h3>
+						<form method="POST" action="/admin">
+							<div class="form-group">
+								<label for="usr">Tên sản phẩm:</label>
+								<input type="text" class="form-control" id="insert_product_name" placeholder="Nhập tên sản phẩm">
+							</div>
+							<div class="form-group">
+								<label for="pwd">Loại sản phẩm:</label>
+								<select class="form-control" id="insert_category">
+									{{#each data.categories}}
+									<option category_id = "{{this.id}}">{{this.category_name}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="pwd">Nhập Nguồn gốc:</label>
+								<input type="text" class="form-control" id="insert_origin" placeholder="Nhập nguồn gốc">
+							</div>
+							<div class="form-group">
+								<label for="pwd">link hình ảnh:</label>
+								<input type="text" class="form-control" id="insert_images_link" placeholder="nhập link hình ảnh">
+							</div>
+							<div class="form-group">
+								<label for="pwd">mô tả sản phẩm:</label>
+								<textarea class="form-control" id="insert_description"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="pwd">Nhà cung cấp:</label>
+								<select class="form-control" id="insert_vendor">
+									{{#each data.vendors}}
+									<option vendor_id = "{{this.id}}">{{this.vendor_name}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="pwd">Số lượng còn lại:</label>
+								<input type="number" min="0" class="form-control" id="insert_inventory_number" placeholder="số lượng còn lại">
+							</div>
+							<div class="form-group">
+								<label for="pwd">giá:</label>
+								<input type="number" min="0" class="form-control" id="insert_price" placeholder="Nhập giá">
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-success btn-block" id="btn-add-product">Thêm sản phẩm</button>
+							</div>
+						</form>
+					</div>
 
-					      <tr>
-					        <td>Louis Chevallier</td>
-					        <td>Branky</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
+					<div class="col-md-6">
+						<h3 style="color: #00bfff;">Xóa Sản Phẩm</h3>
+						<form >
+							<table class="table">
+								<thead>
+									<tr>
+										<th>ID Sản Phẩm</th>
+										<th>Tên Sản Phẩm</th>
+										<th>Xóa</th>
+									</tr>
+								</thead>
+								<tbody>
+									{{#each data.products}}
+									<tr>
+										<td>{{this.id}}</td>
+										<td>{{this.name}}</td>
+										<td>
+											<button type="button" class="btn-delete_product btn btn-warning glyphicon glyphicon-remove" product_id = "{{this.id}}"></button>
+										</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</form>
+					</div>
 
-					      <tr>
-					        <td>Raynal</td>
-					        <td>Branky</td>
-					        <td> Den Helkenwijk</td>
-					      </tr>
+				</div>
 
-					      <!--Loại Whisky-->
-					       <tr>
-					        <td>Scotch Whisky</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
+				<div id="QuanLySanPham" class="tab-pane fade">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Sản Phẩm</th>
+								<th>Loại Sản Phẩm</th>
+								<th>Nhà Sản Xuất</th>
+								<th>Hàng tồn trong kho</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each data.products}}
+							<tr>
+								<td>
+									{{this.name}}
+								</td>
+								<td>
+									{{this.category}}
+								</td>
+								<td>
+									{{this.origin}}
+								</td>
+								<td>
+									{{this.inventory_number}}
+								</td>
+							</tr>
 
-					      <tr>
-					        <td>American Whiskey</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
+							{{/each}}
 
-					      <tr>
-					        <td>Canadian Whisky</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="QuanLiDonHang" class="tab-pane fade">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Mã đơn hàng</th>
+								<th>Ngày mua</th>
+								<th>Sản phẩm</th>
+								<th>Tổng tiền</th>
+								<th>Trạng thái đơn hàng</th>
+							</tr>
+						</thead>
 
-					      <tr>
-					        <td>Irish Whiskey.</td>
-					        <td>Whisky</td>
-					        <td> Lindores Abbey</td>
-					      </tr>
-
-					      <!-- Loaijk Rhum -->
-
-					      <tr>
-					        <td>Rhum Puerto Rico</td>
-					        <td>Rhum</td>
-					        <td>john@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Rhum Jamaica</td>
-					        <td>Rhum</td>
-					        <td>mary@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Rhum Demeraran</td>
-					        <td>Rhum</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Rhum Martinique</td>
-					        <td>Rhum</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <!-- Loại Vodka -->
-					      <tr>
-					        <td>Smirnoff</td>
-					        <td>Vodka</td>
-					        <td>john@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Absolut</td>
-					        <td>Vodka</td>
-					        <td>mary@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Stolichnaya</td>
-					        <td>Vodka</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>Finlandia</td>
-					        <td>Vodka</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-						<!-- Loại Gin -->
-						<tr>
-					        <td>LondonDryGin</td>
-					        <td>Gin</td>
-					        <td>john@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>AmericanDryGin</td>
-					        <td>Gin</td>
-					        <td>mary@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>GeneverGin</td>
-					        <td>Gin</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					      <tr>
-					        <td>OldTomGin</td>
-					        <td>Gin</td>
-					        <td>july@example.com</td>
-					      </tr>
-
-					    </tbody>
-					  </table>
-				    </div>
-
-				    <div id="QuanLiDonHang" class="tab-pane fade">
-				      <table class="table">
-					    <thead>
-					      <tr>
-					        <th>Mã đơn hàng</th>
-					        <th>Ngày mua</th>
-					        <th>Sản phẩm</th>
-					        <th>Tổng tiền</th>
-					        <th>Trạng thái đơn hàng</th>
-					      </tr>
-					    </thead>
-
-					    <tbody>
-
-						<tr id = 'DoiMau'>
-					       <td>1512445</td>
-					        <td>05/07/200</td>
-					        <td>LondonDryGin</td>
-					        <td>12$</td>
-					        <td>
-					        	<form>
-							    <div class="form-group">
-							      <select class="form-control" id="mySelect" onchange="myFunction()" >
-							        <option value="ChuaGiao">Chưa Giao</option>
-							        <option value="DangGiao" selected="true">Đang Giao</option>
-							        <option value="DaGiao">Đã Giao</option>
-							      </select>
-							    </div>
-							  </form>
-					        </td>
-					      </tr>
-
-
-					      <tr id = 'DoiMau1'>
-					       <td>1512445</td>
-					        <td>05/07/200</td>
-					        <td>LondonDryGin</td>
-					        <td>12$</td>
-					        <td>
-					        	<form>
-							    <div class="form-group">
-							      <select class="form-control" id="mySelect1" onchange="myFunction1()" >
-							        <option value="ChuaGiao" selected="true">Chưa Giao</option>
-							        <option value="DangGiao">Đang Giao</option>
-							        <option value="DaGiao" selected="true">Đã Giao</option>
-							      </select>
-							    </div>
-							  </form>
-					        </td>
-					      </tr>
-
-					      <tr id = 'DoiMau2'>
-					       <td>1512445</td>
-					        <td>05/07/200</td>
-					        <td>LondonDryGin</td>
-					        <td>12$</td>
-					        <td>
-					        	<form>
-							    <div class="form-group">
-							      <select class="form-control" id="mySelect2" onchange="myFunction2()" >
-							        <option value="ChuaGiao" selected="true">Chưa Giao</option>
-							        <option value="DangGiao">Đang Giao</option>
-							        <option value="DaGiao">Đã Giao</option>
-							      </select>
-							    </div>
-							  </form>
-					        </td>
-					      </tr>
-
-					      <tr id = 'DoiMau3'>
-					       <td>1512445</td>
-					        <td>05/07/200</td>
-					        <td>LondonDryGin</td>
-					        <td>12$</td>
-					        <td>
-					        	<form>
-							    <div class="form-group">
-							      <select class="form-control" id="mySelect3" onchange="myFunction3()" >
-							        <option value="ChuaGiao" selected="true">Chưa Giao</option>
-							        <option value="DangGiao">Đang Giao</option>
-							        <option value="DaGiao">Đã Giao</option>
-							      </select>
-							    </div>
-							  </form>
-					        </td>
-					      </tr>
-
-				    	</tbody>
-  					 </table>
-				    </div>
-			  </div>
+						<tbody >
+							{{#each data.orders}}
+							<tr {{#if_eq this.status 1}} class="warning" {{/if_eq}} {{#if_eq this.status 2}} class="info" {{/if_eq}} {{#if_eq this.status 3}} class="success" {{/if_eq}}>
+								<td>
+									{{this.id}}
+								</td>
+								<td>
+									{{this.order_datetime}}
+								</td>
+								<td>
+									{{this.receiver_name}}
+								</td>
+								<td>
+									{{this.cost}}
+								</td>
+								<td>
+									<div class="form-group">
+										<select class="form-control order-status" order_id="{{this.id}}">
+											<option status = "{{this.status}}" value="ChuaGiao" {{#if_eq this.status 1}} selected= "true" {{/if_eq}}>Chưa Giao</option>
+											<option status = "{{this.status}}"  value="DangGiao" {{#if_eq this.status 2}} selected= "true" {{/if_eq}}>Đang Giao</option>
+											<option status = "{{this.status}}"  value="DaGiao" {{#if_eq this.status 3}} selected= "true" {{/if_eq}}>Đã Giao</option>
+										</select>
+									</div>
+								</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="../javascripts/admin/script.js"></script>
+	<script type="text/javascript">
+		var base_url = location.protocol + "//" + document.domain + ":" + location.port;
+		$(".btn-delete_category").click(function(){
+			var category_id = $(this).attr("category_id");
+			$.ajax({
+				url: base_url + "/admin/category/" + category_id,
+				type: 'DELETE',
+				success: function(res){
+					location.reload();
+				},
+				error: function (errormessage) {
+					location.reload();
+				}
+			});
+		});
+		$("#btn-add-product").click(function(){
+				var product = {
+						category_id : $("#insert_category").find("option:selected").attr("category_id"),
+						product_name : $("#insert_product_name").val(),
+						origin: $("#insert_origin").val(),
+						images: $("#insert_images_link").val(),
+						description: $("#insert_description").val(),
+						inventory_number : $("#insert_inventory_number").val(),
+						price : $("#insert_price").val(),	
+						category: $("#insert_category").val(),
+						vendor_id: $("#insert_vendor").find("option:selected").attr("vendor_id"),
+				};
+				$.ajax({
+					url: base_url + "/admin/product",
+					type: "post",
+					data: product,
+					dataType: 'json',
+					success: function(){
+						location.reload();
+					}
+				})
+		});
+
+
+
+		$(".btn-delete_product").click(function(){
+			var product_id = $(this).attr("product_id");
+			$.ajax({
+				url: base_url + "/admin/product/" + product_id,
+				type: 'DELETE',
+				success: function(res){
+					location.reload();
+				},
+				error: function (errormessage) {
+					location.reload();
+				}
+			});
+		});
+
+		$(".btn-delete_vendor").click(function(){
+			var vendor_id = $(this).attr("vendor_id");
+			$.ajax({
+				url: base_url + "/admin/vendor/" + vendor_id,
+				type: "delete",
+				dataType: "json",
+				success: function(){
+					location.reload();
+				}
+			})
+		})
+		$(".order-status").change(function(){
+			var order_id = $(this).attr('order_id');
+			var status = $(this).val();
+			var order_status_id = 1;
+			if(status == 'ChuaGiao'){
+				order_status_id = 1;
+			}
+			if(status == 'DangGiao'){
+				order_status_id = 2;
+			}
+			if(status == 'DaGiao'){
+				order_status_id = 3;
+			}
+
+			var data = {
+				order_id: order_id,
+				order_status: order_status_id
+			}
+			$.ajax({
+				url: base_url + "/admin/order",
+				type: "put",
+				dataType: "json",
+				data: data,
+				success: function(res){
+					alert(res.msg);
+				}
+			})
+		})
+	</script>
 </body>
 </html>
