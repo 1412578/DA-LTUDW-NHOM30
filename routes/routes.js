@@ -45,6 +45,7 @@ module.exports = {
 		var router = express.Router();
 		router.use(csrfProtection);
 		router.get('/:id', products.show);
+		router.get('/search/:name', products.searchByPrefix);
 
 		return router;
 	},

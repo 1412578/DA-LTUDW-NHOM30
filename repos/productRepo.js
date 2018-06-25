@@ -60,3 +60,10 @@ exports.getProductByVendorId = function getProductByVendorId(id, vendor_id, opti
 		sql += ` LIMIT ${options.limit}`;
 	return db.load(sql);
 }
+
+exports.getProductByFirstNamePrefix = function getProductByFirstNamePrefix(name){
+	let sql = `	SELECT id, name, images, price
+				FROM product
+				WHERE name LIKE '${name}%'`;
+	return db.load(sql);
+}

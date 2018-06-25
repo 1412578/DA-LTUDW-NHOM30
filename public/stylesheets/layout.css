@@ -292,3 +292,92 @@ body{
 .full-height{
 	min-height: calc(100vh - 100px);
 }
+
+/* Search box */
+.search-window{
+	position: relative;
+}
+.search-results{
+	display: none;
+	position: absolute;
+	left: 0;
+	background-color: white;
+	top: 33px;
+	width: 75%;
+	height: 300px;
+	border: solid 1px #d8d8d8;
+	box-shadow: 1px 5px 5px 1px rgba(0,0,0,0.06);
+}
+.search-window.active .search-results{
+	display: flex;
+
+	flex-direction: column;
+	overflow: hidden;
+}
+.search-results-inner{
+	overflow-y: scroll;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	left: 0;
+	width: calc(100% + 15px);
+	height: 300px;
+}
+.search-window .search-results .item{
+	display: flex;
+	position: relative;
+	height: 70px;
+	padding: 5px;
+	padding-left: 15px;
+	align-items: center;
+	transition: background-color 0.1s ease-in-out;
+}
+.search-window .search-results .item:hover{
+	background-color: #ececec;
+}
+.search-window .search-results .item .image{
+	display: flex;
+	justify-content: flex-end;
+	height: 80%;
+}
+.search-window .search-results .item .info{
+	display: flex;
+	padding: 15px;
+	width: 80%;
+	flex-direction: column;
+	justify-content: center;
+}
+.search-window .search-results .item .info .name{
+	color: black;
+}
+.search-window .search-results .item .info .price{
+	color: #c55454;
+}
+.scroll-bar-bgr{
+	position: absolute;
+	right: 0;
+	background-color: #fafafa;
+	width: 5px;
+	height: 100%;
+}
+.scroll-bar{
+	position: absolute;
+	right: 0;
+	background-color: #c1c1c1;
+	border-radius: 5px;
+	width: 5px;
+	height: 100%;
+}
+.search-results-wrapper{
+	position: relative;
+	height: 100%;
+}
+mark{
+	background-color: #ececec;
+	color: black;
+	padding-left: 0;
+	padding-right: 0;
+}
+a.search-item{
+	text-decoration: none !important;
+}
