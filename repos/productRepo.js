@@ -32,6 +32,7 @@ exports.limitMostSoldProduct = function(limit){
 exports.limitMostViewProduct = function(limit){
 	var sql = `	SELECT id, name, images, price 
 				FROM product ORDER BY view DESC LIMIT ${limit}`;
+}
 
 exports.getProductById = function(id){
 	let sql = `	SELECT id, name, images, 
