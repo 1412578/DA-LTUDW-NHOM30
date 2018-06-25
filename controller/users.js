@@ -101,6 +101,21 @@ function cart_update(req, res, next){
 	});
 }
 
+function cart_create(req, res, next){
+	let {product_id, product_quantity} = req.body;
+	let user_id = req.session.user_id;
+	cartRepo.checkCart(user_id, product_id).then(rows=>{
+		if (rows.length <= 0)
+			return cartRepo.addToCart(user_id, product_id, product_quantity);
+		else
+			return cartRepo.updateToCart(user_id, product_id, product_quantity);
+	})
+	.then(results=>{
+		res.redirect(`/product/${product_id}`);
+	})
+	.catch(err=>next(err));
+}
+
 function history(req, res, next){
 	let sortMode = "DESC";
 	if (req.query.sort == "ASC")
@@ -116,6 +131,7 @@ function history(req, res, next){
 
 module.exports =  {
 	"show": show, "create": create, "info": info, "cart": cart,
-	"update": update, "history": history, "cart_update": cart_update
+	"update": update, "history": history, "cart_update": cart_update,
+	"cart_create": cart_create
 };
 

@@ -18,3 +18,24 @@ exports.deleteAll = function deleteAllCart(user_id){
 	var sql = `DELETE FROM cart WHERE user_id = '${user_id}'`;
 	return db.save(sql, this._connection);
 }
+
+exports.addToCart = function addToCart(user_id, product_id, product_quantity){
+	var sql = `	INSERT INTO cart(
+					user_id,
+					product_id, 
+					product_quantity)
+				VALUES (${user_id}, ${product_id}, ${product_quantity})`;
+	return db.save(sql);
+}
+exports.checkCart = function checkCart(user_id, product_id){
+	var sql = ` SELECT id 
+				FROM cart 
+				WHERE user_id = ${user_id} AND product_id = ${product_id}`;
+	return db.load(sql);
+}
+exports.updateToCart = function updateToCart(user_id, product_id, product_quantity) {
+	var sql = `UPDATE cart 
+				SET product_quantity = ${product_quantity}
+				WHERE product_id = ${product_id} AND user_id = ${user_id}`;
+	return db.save(sql);
+}

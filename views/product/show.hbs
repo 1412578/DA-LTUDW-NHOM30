@@ -1,13 +1,14 @@
-<div class="col-sm-9">
-    <div class="row">
+<div class="col-sm-12">
+    <div class="row full-height">
         <div class="col-sm-5">
-            <div class="item">
+            <div class="product-image">
                 <a href="#"> <img src="{{product.images}}" alt="" style="width:100%"></a>
             </div>
         </div>
         <div class="col-sm-7">
-            <form acion="/user/cart/new" method="POST" class="product-buy-box">
-            	<input type="hidden" name="id" value="{{product.id}}">
+            <form action="/user/cart/create" method="POST" class="product-buy-box">
+            	<input type="hidden" name="_csrf" value={{csrfToken}}>
+                <input type="hidden" name="product_id" value="{{product.id}}">
                 <div class="title">{{product.name}}</div>
                 <div class="sub-box">
                     <div class="status">
@@ -69,57 +70,61 @@
             </form>
         </div>
     </div>
-</div>
-<div id="sidebar" class="col-sm-3">
-    <h3>Cùng loại</h3>
-    <hr class="soften" />
-    <div class="well well-small">
-        <ul class="nav flex-column sidebar">
-            <li class="nav-item"><a class="nav-link" href="/category/1">Brandy</a></li>
-            <li class="nav-item"><a class="nav-link" href="/category/2">Whisky</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Rhum</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Vodka</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Gin</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Vin(Wine)</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Tequila</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Liqueurs </a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Hennessy</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Chivas</a></li>
-            <li style="border:0"> &nbsp;</li>
-        </ul>
+    <div class="stand-out">
+        <h3>Sản phẩm cùng loại</h3>
+        <hr>
+        <div class="row">
+        	{{#each product.sameCategory}}
+            <div class="col-sm">
+                <div class="product-item">
+                    <div class="img-wrapper">
+                        <a href="/product/{{this.id}}"><img class="w-100" src="{{this.images}}">
+							</a>
+                    </div>
+                    <div class="caption">
+                        <div class="title">{{this.name}}</div>
+                        <div class="price">{{this.price}}</div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
     </div>
-    <h3>Cùng nhà sản xuất</h3>
-    <hr class="soften" />
-    <div class="well well-small">
-        <ul class="nav flex-column sidebar">
-            <li class="nav-item"><a class="nav-link" href="/category/1">Brandy</a></li>
-            <li class="nav-item"><a class="nav-link" href="/category/2">Whisky</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Rhum</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Vodka</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Gin</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Vin(Wine)</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Tequila</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Liqueurs </a></li>
-            <li class="nav-item"><a class="nav-link" href="products_1.html">Hennessy</a></li>
-            <li class="nav-item"><a class="nav-link" href="products_2.html">Chivas</a></li>
-            <li style="border:0"> &nbsp;</li>
-        </ul>
+    <div class="stand-out">
+        <h3>Sản phẩm cùng nhà sản xuất</h3>
+        <hr>
+        <div class="row">
+        	{{#each product.sameVendor}}
+            <div class="col-sm">
+                <div class="product-item">
+                    <div class="img-wrapper">
+                        <a href="/product/{{this.id}}"><img class="w-100" src="{{this.images}}">
+							</a>
+                    </div>
+                    <div class="caption">
+                        <div class="title">{{this.name}}</div>
+                        <div class="price">{{this.price}}</div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </div>
 <script>
-	var quantityElem = document.getElementById("quantity");
-	document.getElementById("increase").addEventListener("click", function(event){
-		var quantity = parseInt(quantityElem.value);
-		if (isNaN(quantity) || quantity < 0)
-			quantity = 0;
-		quantityElem.value = quantity + 1;
-		event.preventDefault();
-	});
-	document.getElementById("decrease").addEventListener("click", function(event){
-		var quantity = parseInt(quantityElem.value);
-		if (isNaN(quantity) || quantity <= 1)
-			quantity = 2;
-		quantityElem.value = quantity - 1;
-		event.preventDefault();
-	});
+var quantityElem = document.getElementById("quantity");
+document.getElementById("increase").addEventListener("click", function(event) {
+    var quantity = parseInt(quantityElem.value);
+    if (isNaN(quantity) || quantity < 0)
+        quantity = 0;
+    quantityElem.value = quantity + 1;
+    event.preventDefault();
+});
+document.getElementById("decrease").addEventListener("click", function(event) {
+    var quantity = parseInt(quantityElem.value);
+    if (isNaN(quantity) || quantity <= 1)
+        quantity = 2;
+    quantityElem.value = quantity - 1;
+    event.preventDefault();
+});
 </script>
