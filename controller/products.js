@@ -23,6 +23,12 @@ function show(req, res, next){
 	})
 	.catch(err => next(err));
 }
+function searchByPrefix(req, res, next){
+	productRepo.getProductByFirstNamePrefix(req.params.name).then(rows=>{
+		res.json({items: rows});
+	})
+	.catch(err=>next(err));
+}
 
-module.exports =  {"show": show};
+module.exports =  {"show": show, "searchByPrefix": searchByPrefix};
 
