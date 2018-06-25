@@ -180,6 +180,13 @@ body{
 	max-width: 100%;
 }
 
+.col-2m4{
+	width: 20%;
+	max-width: 20%;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
 
 /* product/show */
 .product-buy-box{
