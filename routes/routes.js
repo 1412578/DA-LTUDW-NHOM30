@@ -29,6 +29,7 @@ module.exports = {
 		router.get('/cart', restrict.user, users.cart);
 		router.post('/cart/update', restrict.user, users.cart_update);
 		router.get('/history', restrict.user, users.history);
+		router.post('/cart/create', restrict.user, users.cart_create);
 		
 		return router;
 	},
@@ -42,7 +43,7 @@ module.exports = {
 	},
 	"products": function(){
 		var router = express.Router();
-
+		router.use(csrfProtection);
 		router.get('/:id', products.show);
 
 		return router;
