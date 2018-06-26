@@ -4,8 +4,6 @@ var exphbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var compression = require('compression');
-var helmet = require('helmet');
 var routes = require('./routes/routes.js');
 var session = require('express-session');
 var sessionPassData = require("./middle-wares/sessionPassData");
@@ -27,9 +25,7 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', 'hbs');
 
-app.use(compression());
 app.use(logger('dev'));
-app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
