@@ -29,6 +29,23 @@ function searchByPrefix(req, res, next){
 	})
 	.catch(err=>next(err));
 }
+function productList(req, res, next){
+	productRepo.limitNewestProduct(20).then(rows=>{
+		res.locals.products = rows;
+		res.render("product/list");
+	}).catch(err=>next(err));
+}
 
-module.exports =  {"show": show, "searchByPrefix": searchByPrefix};
+function productFilter(req, res, next){
+	let {categories, vendors, range} = req.query;
+	let priceFilter = productRepo.getFilterByPrice(range);
+	let categoriesFilter = productRepo.getFilterByCategories(categories);
+	let vendorsFilter = productRepo.getFilterByVendors(vendors);
+	productRepo.getProductByFilter([priceFilter, categoriesFilter, vendorsFilter]).then(rows=>{
+		res.json({items: rows});
+	})
+	.catch(err=>next(err));
+}
+
+module.exports =  {"show": show, "searchByPrefix": searchByPrefix, "list": productList, "filter": productFilter};
 

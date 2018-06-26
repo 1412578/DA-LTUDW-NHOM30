@@ -1,0 +1,343 @@
+<div class="col-sm-3">
+	Nhà sản xuất
+	<hr>
+	<nav>
+        <label>
+            <input type="checkbox" checked> Tất cả
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Vodka
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Wine
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Golden
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Meiller
+        </label>
+    </nav>
+    <br>
+    Loại sản phẩm
+	<hr>
+	<nav>
+        <label>
+            <input type="checkbox" checked> Tất cả
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Vodka
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Wine
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Golden
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input type="checkbox"> Meiller
+        </label>
+    </nav>
+    <br>
+    Giá
+    <hr>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=0&range[to]=500000"> 0 - 500.000
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=500000&range[to]=2000000"> 500.000 - 2.000.000
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=2000000&range[to]=10000000"> 2.000.000 - 10.000.000
+        </label>
+    </nav>
+     <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=10000000"> Trên 10.000.000
+        </label>
+    </nav>
+    <br>
+    <nav id="slider">
+    	<div class="slider-panel">
+    		<div class="slider-trail">
+    		</div>
+    		<div id="slider-bar" class="slider-bar"></div>
+    		<div id="slider-control-1" class="slider-control"></div>
+    		<div id="slider-control-2" class="slider-control"></div>
+    	</div>
+    	<br>
+    	<div class="slider-input">
+	    	<input id="min" value="0">
+	    	<input id="max" value="10.000.000">
+    	</div>
+    </nav>
+    <br><br><br><br><br>
+</div>
+<div class="col-sm-9">
+    <div class="row">
+        <div class="col">
+            <br>
+            <hr class="mt-0">
+            <div id="badge-ribbon"></div>
+            <div class="row product-view">
+                {{#each products}}
+                <div class="col-3">
+                    <div class="product-item">
+                        <div class="img-wrapper">
+                            <a href="/product/{{this.id}}"><img src="{{this.images}}">
+							</a>
+                        </div>
+                        <div class="caption">
+                            <div class="title">{{this.name}}</div>
+                            <div class="price">{{this.price}}</div>
+                        </div>
+                    </div>
+                </div>
+                {{#if_eq @index 3}}
+                <div class="w-100"></div>
+                {{/if_eq}} {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	function formatMoney(num){
+		var str = num.toString();
+		return Array.prototype.reduce.call(str, function(a,b, index){
+			return a + ((((str.length - index) % 3 == 0) && (index != 0)) ? "." + b : b);
+		}, "");
+	}
+	function validateMoney(value){
+		return ((value.match(/^\d+$/)) || (value == ""));
+	}
+	document.addEventListener("DOMContentLoaded", function(){
+		function sliderControlSetup(elem, leftPosParam, rightPosParam){
+			var panel = elem.querySelector(".slider-panel");
+			var slider1 = elem.querySelector("#slider-control-1");
+			var slider2 = elem.querySelector("#slider-control-2");
+			var sliderBar = elem.querySelector("#slider-bar");
+			/* Giá trị tối đa và sliderControl đạt được */
+			var vmax = panel.offsetWidth - slider1.offsetWidth;
+
+			/* Vị trí con trỏ chuột khi mousedown -> để tính deltaX */
+			var xMouseDown = 0;
+
+			/* 	Giá trị của sliderControl trước khi mousemove
+				Được khởi tạo với giá trị là % so với width của slider
+				Chỉ được cập nhật sau mỗi lần mouseup
+				Cộng với deltax để thành currentX */
+			var sliderX1 = vmax * 1.0 * leftPosParam / 100; 
+			var sliderX2 = vmax * 1.0 * rightPosParam / 100; 
+
+			/* Giá trị của sliderControl được mousedown trước khi mousedown */
+			var sliderSelectIndex = 1;
+			var sliderXCurrent = sliderX1;
+
+			/* Giá trị của của sliderControl trong trạng thái mousemove */
+			var currentX = sliderXCurrent;
+
+			/* Init style */
+			slider1.style.transform = "translate("+sliderX1+"px)";
+			slider2.style.transform = "translate("+sliderX2+"px)";
+			/* Class */
+			var classSelect = "selected";
+
+			var idAnimationFrame = 0;
+			
+			function sliderMouseDownHandler(event){
+				xMouseDown = event.screenX;
+				currentX = sliderXCurrent + "px";
+				idAnimationFrame = window.requestAnimationFrame(refreshSlider);
+				document.addEventListener("mousemove", sliderMouseMoveHandler);
+				document.addEventListener("mouseup", sliderMouseUpHandler.bind(this));
+
+				this.classList.add("selected");
+
+				event.preventDefault();
+			}
+			function returnRangeValue(){
+				var ret = {};
+				if (sliderSelectIndex == 1){
+					ret.left = Math.min(sliderX2, parseInt(currentX)) * 1.0 / vmax;
+					ret.right = Math.max(sliderX2, parseInt(currentX)) * 1.0 / vmax;
+				}
+				else{
+					ret.left = Math.min(sliderX1, parseInt(currentX)) * 1.0 / vmax;
+					ret.right = Math.max(sliderX1, parseInt(currentX)) * 1.0 / vmax;
+				}
+				return ret;
+			}
+			function sliderMouseMoveHandler(event){
+				var deltaX = event.screenX - xMouseDown;
+				if ((sliderXCurrent + deltaX <= vmax) && (sliderXCurrent + deltaX >= 0))
+					currentX = sliderXCurrent + deltaX + "px";
+				else if (sliderXCurrent + deltaX < 0)
+					currentX = "0px";
+				else
+					currentX = vmax + "px";
+
+				/* Emit change event */
+				var changeEvent = new Event("sliderchange");
+				changeEvent.range =  returnRangeValue();
+				elem.dispatchEvent(changeEvent);
+			}
+			function refreshSlider(){
+				var mins = 0;
+				var maxs = 0;
+				var x = parseInt(currentX);
+				if (sliderSelectIndex == 1){
+					mins = Math.min(sliderX2, x);
+					maxs = Math.max(sliderX2, x);
+					slider1.style.transform = "translateX("+x+"px)";
+				}
+				else{
+					mins = Math.min(sliderX1, x);
+					maxs = Math.max(sliderX1, x);
+					slider2.style.transform = "translateX("+x+"px)";
+				}
+				sliderBar.style.left = mins + 8 + "px";
+				sliderBar.style.width = maxs-mins + "px";
+				idAnimationFrame = window.requestAnimationFrame(refreshSlider);
+				
+			}
+			function sliderMouseUpHandler(event){
+				document.removeEventListener("mousemove", sliderMouseMoveHandler);
+				document.removeEventListener("mouseup", sliderMouseUpHandler);
+				window.cancelAnimationFrame(idAnimationFrame);
+				if (sliderSelectIndex == 1)
+					sliderX1 = parseInt(currentX);
+				else 
+					sliderX2 = parseInt(currentX);
+
+				this.classList.remove("selected");
+
+				/* Emit release slider event */
+				var changeEvent = new Event("sliderrelease");
+				changeEvent.range =  returnRangeValue();
+				elem.dispatchEvent(changeEvent);
+
+			}
+			slider1.addEventListener("mousedown", function(){ 
+				sliderXCurrent = sliderX1;
+				sliderSelectIndex = 1;
+			});
+			slider1.addEventListener("mousedown", sliderMouseDownHandler);
+
+			slider2.addEventListener("mousedown", function(){ 
+				sliderXCurrent = sliderX2;
+				sliderSelectIndex = 2;
+			});
+			slider2.addEventListener("mousedown", sliderMouseDownHandler);
+		}
+
+		var slider = document.getElementById("slider");
+		sliderControlSetup(slider, 0,100);
+
+		var minTextBar = document.getElementById("min");
+		var maxTextBar = document.getElementById("max");
+
+		
+
+		minTextBar.addEventListener("keypress", function(event){
+			if (event.key.length < 2){
+				var str  = (minTextBar.value).concat(event.key).replace(/\./g, "");
+				if (!validateMoney(str)){
+					minTextBar.value = _num;
+					event.preventDefault();
+				}
+				else{
+					_num = formatMoney(str);
+					minTextBar.value = _num;
+					event.preventDefault();
+				}
+			}
+		});
+		function ajaxJsSimple(method, url, callback){
+			var xhr = new XMLHttpRequest();
+			xhr.open(method, url, true);
+			xhr.onreadystatechange = function(res){
+				if ((this.readyState == 4) && (res.status = 200)){
+					var resJson = JSON.parse(this.responseText);
+					callback(resJson);
+				}
+			}
+			xhr.send();
+		}
+		/* Price select */
+		function updateProducts(elem, json){
+			var htmlContent = json.items.map(function(item){
+				return `<div class="col-3">
+		                    <div class="product-item">
+		                        <div class="img-wrapper">
+		                            <a href="/product/${item.id}"><img src="${item.images}">
+									</a>
+		                        </div>
+		                        <div class="caption">
+		                            <div class="title">${item.name}</div>
+		                            <div class="price">${item.price}</div>
+		                        </div>
+		                    </div>
+		                </div>`;
+			}).reduce(function(a,b, index){
+				return (index % 3 == 0 ? `<div class="w-100"></div>` + a : a).concat(b);
+			},"");
+			elem.innerHTML = htmlContent;
+		}
+		function priceSelectHandler(event){
+			var query = event.target.value;
+			ajaxJsSimple("GET", `/product/filter?${query}`, function(resJson){
+				updateProducts(document.querySelector(".product-view"), resJson);
+			});
+		}
+		
+		document.querySelectorAll(".price-select").forEach(function(elem){
+			elem.addEventListener("change", priceSelectHandler);
+		});
+
+		var maxVirtualValue = 10000000.0;
+		var stepVirtualValue = 5000.0;
+		function debounce(fn, t) {
+		    var lock = false;
+		    var timeoutId = null;
+		    return function(event) {
+		        if (timeoutId != null)
+		            clearTimeout(timeoutId);
+		        timeoutId = setTimeout(fn, t, event);
+		    }
+		}
+		function sliderChangeFilterListener(e){
+			ajaxJsSimple("GET", `/product/filter?range[from]=${e.range.left*maxVirtualValue}&range[to]=${e.range.right*maxVirtualValue}`, function(resJson){
+					updateProducts(document.querySelector(".product-view"), resJson);
+				});
+		}
+		var debounceFilterListener = debounce(sliderChangeFilterListener, 500);
+		slider.addEventListener("sliderchange", function(e){
+			var money1 = maxVirtualValue * e.range.left / stepVirtualValue;
+			var money2 = maxVirtualValue * e.range.right / stepVirtualValue;
+			minTextBar.value = formatMoney(Math.ceil(money1) * stepVirtualValue);
+			maxTextBar.value = formatMoney(Math.ceil(money2) * stepVirtualValue);
+			debounceFilterListener(e);
+		});
+	});
+</script>
