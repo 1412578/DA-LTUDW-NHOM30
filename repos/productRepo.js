@@ -60,3 +60,42 @@ exports.getProductByVendorId = function getProductByVendorId(id, vendor_id, opti
 		sql += ` LIMIT ${options.limit}`;
 	return db.load(sql);
 }
+
+exports.getProductByFirstNamePrefix = function getProductByFirstNamePrefix(name){
+	let sql = `	SELECT id, name, images, price
+				FROM product
+				WHERE name LIKE '${name}%'`;
+	return db.load(sql);
+}
+
+
+exports.getProductByFilter = function getProductByFilter(filters){
+	let sql = `	SELECT id, name, images, price
+				FROM product WHERE 1`;
+	sql = filters.reduce((a,b)=>a.concat(b), sql) + ` ORDER BY PRICE DESC`;
+	console.log(sql);
+	return db.load(sql);
+}
+
+exports.getFilterByCategories = function getFilterByCategories(ids){
+	if (ids)
+		return ids.reduce((a,b)=>a.concat(` OR category_id = ${b}`), " AND (0 ") + ")";
+	return "";
+}
+
+exports.getFilterByVendors = function getFilterByVendors(ids){
+	if (ids)
+		return ids.reduce((a,b)=>a.concat(` OR vendor_id = ${b}`), " AND (0") + ")";
+	return "";
+}
+
+exports.getFilterByPrice = function getFilterByPrice(range){
+	let sql = ``;
+	if (range){
+		if (range.from)
+			sql += ` AND price >= ${range.from}`;
+		if (range.to)
+			sql += ` AND price <= ${range.to}`;
+	}
+	return sql;
+}
