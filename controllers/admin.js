@@ -49,9 +49,35 @@ function deleteProductById(req, res, next){
 	});
 }
 
+function insertCategory(req, res, next){
+	categoryRepo.insert(req.body.category_name).then(function(results){
+		res.redirect("/admin");
+	}).catch(function(err){
+		next(err);
+	});
+}
+
+function deleteCategoryById(req, res, next){
+	categoryRepo.deleteById(req.params.category_id)
+	.then(function(results){
+		res.status(200).json({
+			err: false
+		})
+	}).catch(function(err){
+		next(err);
+	});
+}
+
+function updateCategory(){
+
+}
+
 
 module.exports =  {
 	"index": index,
 	"insertproduct": insertproduct,
-	"deleteProductById": deleteProductById
+	"deleteProductById": deleteProductById,
+	"insertCategory": insertCategory,
+	"deleteCategoryById": deleteCategoryById,
+	"updateCategory": updateCategory
 };
