@@ -9,17 +9,17 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" class="dropdown-toggle" href="#">Loại</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/category/1">Shirah</a>
-                        <a class="dropdown-item" href="/category/2">Zinfandel</a>
-                        <a class="dropdown-item" href="/category/3">Pinot Noir</a>
+                        {{#each menu.categories}}
+                        <a class="dropdown-item" href="/category/{{this.id}}">{{this.category_name}}</a>
+                        {{/each}}
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" class="dropdown-toggle" href="#">Nhà sản xuất</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/vendor/1">Vodka</a>
-                        <a class="dropdown-item" href="/vendor/2">Rhumu</a>
-                        <a class="dropdown-item" href="/vendor/3">Whisky</a>
+                         {{#each menu.vendors}}
+                        <a class="dropdown-item" href="/vendor/{{this.id}}">{{this.vendor_name}}</a>
+                        {{/each}}
                     </div>
                 </li>
                 {{#if username}}
@@ -68,7 +68,7 @@
             {{#if username}}
             <ul class="navbar-nav ml-auto navbar-nav-standout">
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/cart"></span> 2 sản phẩm <span class="badge badge-notification"> $448.42</span></a>
+                    <a class="nav-link" href="/user/cart"></span>  <span class="badge badge-notification">{{menu.cart}}</span> sản phẩm</a>
                 </li>
             </ul>
             {{/if}}

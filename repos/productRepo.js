@@ -44,18 +44,18 @@ exports.getProductById = function(id){
 				FROM product WHERE id = ${id}`;
 	return db.load(sql);
 }
-exports.getProductByCategoryId = function getProductByCategoryId(id, category_id, options={}){
+exports.getProductByCategoryId = function getProductByCategoryId(category_id, options={}){
 	let sql = `	SELECT id, name, images, price
 				FROM product
-				WHERE category_id = ${category_id} AND id != ${id}`;
+				WHERE category_id = ${category_id}`;
 	if (options.limit)
 		sql += ` LIMIT ${options.limit}`;
 	return db.load(sql);
 }
-exports.getProductByVendorId = function getProductByVendorId(id, vendor_id, options={}){
+exports.getProductByVendorId = function getProductByVendorId(vendor_id, options={}){
 	let sql = `	SELECT id, name, images, price
 				FROM product
-				WHERE vendor_id = ${vendor_id} AND id != ${id}`;
+				WHERE vendor_id = ${vendor_id}`;
 	if (options.limit)
 		sql += ` LIMIT ${options.limit}`;
 	return db.load(sql);

@@ -44,6 +44,7 @@ app.use(session({
 }));
 // Routes
 app.use(sessionPassData);
+app.use(routes.layouts());
 app.use('/', routes.index());
 app.use('/user', routes.users());
 app.use('/session', routes.sessions());
