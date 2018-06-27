@@ -1,126 +1,7 @@
-<div class="col-sm-3">
-	Nhà sản xuất
-	<hr>
-	<nav>
-        <label>
-            <input type="checkbox" checked> Tất cả
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Vodka
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Wine
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Golden
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Meiller
-        </label>
-    </nav>
-    <br>
-    Loại sản phẩm
-	<hr>
-	<nav>
-        <label>
-            <input type="checkbox" checked> Tất cả
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Vodka
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Wine
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Golden
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input type="checkbox"> Meiller
-        </label>
-    </nav>
-    <br>
-    Giá
-    <hr>
-    <nav>
-        <label>
-            <input class="price-select" name="price" type="radio" value="range[from]=0&range[to]=500000"> 0 - 500.000
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input class="price-select" name="price" type="radio" value="range[from]=500000&range[to]=2000000"> 500.000 - 2.000.000
-        </label>
-    </nav>
-    <nav>
-        <label>
-            <input class="price-select" name="price" type="radio" value="range[from]=2000000&range[to]=10000000"> 2.000.000 - 10.000.000
-        </label>
-    </nav>
-     <nav>
-        <label>
-            <input class="price-select" name="price" type="radio" value="range[from]=10000000"> Trên 10.000.000
-        </label>
-    </nav>
-    <br>
-    <nav id="slider">
-    	<div class="slider-panel">
-    		<div class="slider-trail">
-    		</div>
-    		<div id="slider-bar" class="slider-bar"></div>
-    		<div id="slider-control-1" class="slider-control"></div>
-    		<div id="slider-control-2" class="slider-control"></div>
-    	</div>
-    	<br>
-    	<div class="slider-input">
-	    	<input id="min" value="0">
-	    	<input id="max" value="10.000.000">
-    	</div>
-    </nav>
-    <br><br><br><br><br>
-</div>
-<div class="col-sm-9">
-    <div class="row">
-        <div class="col">
-            <br>
-            <hr class="mt-0">
-            <div id="badge-ribbon"></div>
-            <div class="row product-view">
-                {{#each products}}
-                <div class="col-3">
-                    <div class="product-item">
-                        <div class="img-wrapper">
-                            <a href="/product/{{this.id}}"><img src="{{this.images}}">
-							</a>
-                        </div>
-                        <div class="caption">
-                            <div class="title">{{this.name}}</div>
-                            <div class="price">{{this.price}}</div>
-                        </div>
-                    </div>
-                </div>
-                {{#if_eq @index 3}}
-                <div class="w-100"></div>
-                {{/if_eq}} {{/each}}
-            </div>
-        </div>
-    </div>
-</div>
+{{> filter_section}}
+
+{{> products_section products = products header=header}}
+
 <script>
 	function formatMoney(num){
 		var str = num.toString();
@@ -252,7 +133,7 @@
 		}
 
 		var slider = document.getElementById("slider");
-		sliderControlSetup(slider, 0,100);
+		sliderControlSetup(slider, 0, 100);
 
 		var minTextBar = document.getElementById("min");
 		var maxTextBar = document.getElementById("max");
@@ -304,14 +185,74 @@
 			},"");
 			elem.innerHTML = htmlContent;
 		}
+
+		/* Duyệt qua trạng thái của các input để xây dựng query*/
+		var states = getUpdatedStates();
+		var silderquery = "";
+		function queryBuilder(){
+			var categoryQuery = states[0].reduce(function(a,b){
+					if (b.checked)
+						return a.concat("&" + b.elem.getAttribute("data-query"));
+					else
+						return a;
+				}, "cat_filter");
+			var vendorQuery = states[1].reduce(function(a,b){
+					if (b.checked)
+						return a.concat("&" + b.elem.getAttribute("data-query"));
+					else
+						return a;
+				}, "vendor_filter");
+			var priceQuery =  states[2].reduce(function(a,b){			
+					if (b.checked)
+						return a.concat("&" + b.elem.value);
+					else
+						return a;
+				}, "price_filter");
+			return `${categoryQuery}&${vendorQuery}&${priceQuery}`;
+		}
+
+		function getUpdatedStates(){
+			return ["category-filter", "vendor-filter", "price-select"].map(function(className){
+				return Array.prototype.map.call(document.getElementsByClassName(className),
+					function(elem){
+						return {"checked": elem.checked, "elem": elem};
+					});
+			});
+		}
 		function priceSelectHandler(event){
-			var query = event.target.value;
+			states = getUpdatedStates();
+			var query = queryBuilder(states).concat("&"+ silderquery);
+			console.log(query);
 			ajaxJsSimple("GET", `/product/filter?${query}`, function(resJson){
 				updateProducts(document.querySelector(".product-view"), resJson);
 			});
 		}
 		
-		document.querySelectorAll(".price-select").forEach(function(elem){
+		Array.prototype.forEach.call(document.getElementsByClassName("price-select"), function(elem){
+			elem.addEventListener("change", function(){
+				silderquery = "";
+			});
+			elem.addEventListener("change", priceSelectHandler);
+		});
+		function preventUncheckOnly(event, i){
+			if (states[i].every(function(item, index){
+				return ((item.checked == false) || (item.elem == event.target));
+			})){
+				event.stopPropagation();
+				event.preventDefault();
+			}
+		}
+		Array.prototype.forEach.call(document.getElementsByClassName("category-filter"), function(elem){
+			/* Nhắn người dùng uncheck checkbox duy nhất */
+			elem.addEventListener("click", function(event){
+				preventUncheckOnly(event, 0);
+			});
+			elem.addEventListener("change", priceSelectHandler);
+		});
+		Array.prototype.forEach.call(document.getElementsByClassName("vendor-filter"), function(elem){
+			elem.addEventListener("click", function(event){
+				preventUncheckOnly(event, 1);
+			});
 			elem.addEventListener("change", priceSelectHandler);
 		});
 
@@ -327,12 +268,14 @@
 		    }
 		}
 		function sliderChangeFilterListener(e){
-			ajaxJsSimple("GET", `/product/filter?range[from]=${e.range.left*maxVirtualValue}&range[to]=${e.range.right*maxVirtualValue}`, function(resJson){
-					updateProducts(document.querySelector(".product-view"), resJson);
-				});
+			var from = Math.round(e.range.left*maxVirtualValue);
+			var to = Math.round(e.range.right*maxVirtualValue);
+			silderquery = `range[from]=${from}&range[to]=${to}`;
+			priceSelectHandler();
 		}
-		var debounceFilterListener = debounce(sliderChangeFilterListener, 500);
+		var debounceFilterListener = debounce(sliderChangeFilterListener, 200);
 		slider.addEventListener("sliderchange", function(e){
+			document.getElementById("price-custom").checked = true;
 			var money1 = maxVirtualValue * e.range.left / stepVirtualValue;
 			var money2 = maxVirtualValue * e.range.right / stepVirtualValue;
 			minTextBar.value = formatMoney(Math.ceil(money1) * stepVirtualValue);

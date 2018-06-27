@@ -82,5 +82,8 @@ module.exports = {
 		router.get('/', admin.index);
 
 		return router;
+	},
+	"layouts": function(){
+		return products.layouts;
 	}
 }
