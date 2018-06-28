@@ -9,12 +9,13 @@ var admin = require("../controller/admin");
 var orders = require("../controller/orders");
 var csrf = require('csurf');
 var restrict = require('../middle-wares/restrictAccess');
+var rememberThisPage = require('../middle-wares/rememberThisPage');
 var csrfProtection = csrf();
 module.exports = {
 	"index": function(){
 		var router = express.Router();
 
-		router.get('/', index.index);
+		router.get('/', rememberThisPage, index.index);
 
 		return router;
 	},
@@ -24,11 +25,11 @@ module.exports = {
 		router.use(csrfProtection);
 		router.get('/new', restrict.guest, users.show);
 		router.post('/create', restrict.guest, users.create);
-		router.get('/info', restrict.user, users.info);
+		router.get('/info', rememberThisPage, restrict.user, users.info);
 		router.post('/update', restrict.user, users.update);
-		router.get('/cart', restrict.user, users.cart);
+		router.get('/cart', rememberThisPage, restrict.user, users.cart);
 		router.post('/cart/update', restrict.user, users.cart_update);
-		router.get('/history', restrict.user, users.history);
+		router.get('/history', rememberThisPage, restrict.user, users.history);
 		router.post('/cart/create', restrict.user, users.cart_create);
 		
 		return router;
@@ -45,8 +46,8 @@ module.exports = {
 		var router = express.Router();
 		router.use(csrfProtection);
 		router.get('/filter', products.filter);
-		router.get('/list', products.list);
-		router.get('/:id', products.show);
+		router.get('/list', rememberThisPage, products.list);
+		router.get('/:id', rememberThisPage, products.show);
 		router.get('/search/:name', products.searchByPrefix);
 
 		return router;
@@ -65,14 +66,14 @@ module.exports = {
 	"categories": function(){
 		var router = express.Router();
 
-		router.get('/:id', categories.show);
+		router.get('/:id', rememberThisPage, categories.show);
 
 		return router;
 	},
 	"vendors": function(){
 		var router = express.Router();
 
-		router.get('/:id', vendors.show);
+		router.get('/:id', rememberThisPage, vendors.show);
 
 		return router;
 	},

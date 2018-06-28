@@ -110,7 +110,7 @@ function createOrder(req, res, next){
 		return transaction.commit();
 	})
 	.then(results=>{
-		res.redirect("/?msg=Đã tạo đơn hàng thành công");
+		res.redirect(req.cookies.previous_page || "/");
 	})
 	.catch(err=>{
 		if (transaction){

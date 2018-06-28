@@ -30,7 +30,7 @@ function create(req, res, next){
 				req.session.username = user.username;
 				req.session.name = user.name;
 				req.session.user_id = user.id;
-				res.redirect("/");
+				res.redirect(req.cookies.previous_page || "/");
 			} else{
 				throw applicationError("INVALID_USERNAME_OR_PASSWORD");
 			}
@@ -43,7 +43,7 @@ function create(req, res, next){
 
 function remove(req, res, next){
 	req.session.destroy(()=>{
-		res.redirect("/");
+		res.redirect(req.cookies.previous_page || "/");
 	});
 }
 
