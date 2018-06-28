@@ -16,6 +16,7 @@
 					<th scope="col" class="item-quantity">Số lượng</th>
 					<th scope="col" class="item-price">Giá</th>
 					<th scope="col" class="item-totalprice">Tổng giá</th>
+					<th>Xóa</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,6 +30,9 @@
 					<td type="number" class="item-quantity"/><input type="number" name="cart[{{@index}}][product_quantity]" value="{{this.product_quantity}}"></td>
 					<td class="item-price">{{this.price}}</td>
 					<td class="item-totalprice">{{this.totalprice}}</td>
+					<td>
+						<button data-product="{{this.product_id}}" class="shopBtn removeBtn">Bỏ</button>
+					</td>
 				</tr>
 				{{/each}}
 			</tbody>
@@ -39,3 +43,19 @@
 		</div>
 	</div>
 </form>
+<form method="post" id="product-remove-form" action="/user/cart/remove">
+	<input type="hidden" name="_csrf" value="{{csrfToken}}">
+	<input type="hidden" id="product-remove-id" name="product_id" value="">
+</form>
+<script>
+	document.addEventListener("DOMContentLoaded", function(){
+		Array.prototype.forEach.call(document.getElementsByClassName("shopBtn removeBtn"), function(elem){
+			elem.addEventListener("click", function(e){
+				document.getElementById("product-remove-id").value = e.target.getAttribute("data-product");
+				document.getElementById("product-remove-form").submit();
+				e.stopPropagation();
+				e.preventDefault();
+			});
+		});
+	});
+</script>

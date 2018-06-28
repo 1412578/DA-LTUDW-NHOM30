@@ -25,7 +25,7 @@ exports.getInventoryNumber = function(id){
 }
 
 exports.limitNewestProduct = function(limit){
-	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name
+	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name, inventory_number
 				FROM product 
 				JOIN vendor ON product.vendor_id = vendor.id
 				JOIN category ON product.category_id = category.id
@@ -34,7 +34,7 @@ exports.limitNewestProduct = function(limit){
 }
 
 exports.limitMostSoldProduct = function(limit){
-	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name 
+	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name, inventory_number 
 				FROM product
 				JOIN vendor ON product.vendor_id = vendor.id
 				JOIN category ON product.category_id = category.id
@@ -43,7 +43,7 @@ exports.limitMostSoldProduct = function(limit){
 }
 
 exports.limitMostViewProduct = function(limit){
-	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name 
+	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name, inventory_number
 				FROM product
 				JOIN vendor ON product.vendor_id = vendor.id
 				JOIN category ON product.category_id = category.id
@@ -61,7 +61,7 @@ exports.getProductById = function(id){
 	return db.load(sql);
 }
 exports.getProductByCategoryId = function getProductByCategoryId(category_id, options={}){
-	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name
+	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name, inventory_number
 				FROM product
 				JOIN vendor ON product.vendor_id = vendor.id
 				JOIN category ON product.category_id = category.id
@@ -71,7 +71,7 @@ exports.getProductByCategoryId = function getProductByCategoryId(category_id, op
 	return db.load(sql);
 }
 exports.getProductByVendorId = function getProductByVendorId(vendor_id, options={}){
-	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name
+	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name, inventory_number
 				FROM product
 				JOIN vendor ON product.vendor_id = vendor.id
 				JOIN category ON product.category_id = category.id
@@ -90,7 +90,7 @@ exports.getProductByFirstNamePrefix = function getProductByFirstNamePrefix(name)
 
 
 exports.getProductByFilter = function getProductByFilter(filters){
-	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name
+	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name, inventory_number
 				FROM product 
 				JOIN vendor ON product.vendor_id = vendor.id
 				JOIN category ON product.category_id = category.id

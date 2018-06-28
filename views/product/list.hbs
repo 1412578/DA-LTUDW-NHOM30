@@ -181,6 +181,21 @@
 							            <div class="category">Loại: Whisky</div>
 							            <div class="vendor">NSX: Vodka</div>
 							        </div>
+							         {{#if_eq this.inventory_number 0}}
+							        <div class="quantity-control">
+							            <div style="margin: 0 auto; color:red;">Hết hàng</div>
+							        </div>
+							        {{else}}
+							        <form method="POST" action="/user/cart/create" class="quantity-control">
+						            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+						            <input type="hidden" name="product_id" value="${item.id}">
+						            <input type="hidden" name="product_quantity" value="1">
+						            <input type="hidden" name="product_increase" value="1">
+						            <button class="add-btn-cart">
+						                Thêm
+						            </button>
+						        	</form>
+						        	{{/if_eq}}
 							    </div>
 							</div>
 						</div>`;
