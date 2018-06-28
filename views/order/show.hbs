@@ -10,7 +10,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="buyer-name">Người đặt</label>
-						<input id="buyer-name" class="form-control-plaintext" type="text" value="{{info.user_id}}" readonly>
+						<input id="buyer-name" class="form-control-plaintext" type="text" value="{{info.receiver_name}}" readonly>
 					</div>
 					<div class="form-group">
 						<label for="buyer-name">Người nhận</label>
@@ -39,17 +39,17 @@
 									<th>Tên sản phẩm</th>
 									<th>Số lượng</th>
 									<th>Giá</th>
-									<th>Tổng giá</th>
+									<th>Giá x Số lượng</th>
 								</tr>
 							</thead>
 							<tbody>
 								{{#each info.items}}
 								<tr>
-									<td class="item-image"><img src="{{this.images}}"></td>
+									<td class="item-image"><a href="/product/{{this.product_id}}"><img src="{{this.images}}"></a></td>
 									<td>{{this.name}}</td>
 									<td>{{this.number}}</td>
-									<td>{{this.price}}</td>
-									<td>{{this.totalPrice}}</td>
+									<td>{{money this.price}}</td>
+									<td>{{money this.totalPrice}}</td>
 								</tr>
 								{{/each}}
 							</tbody>
@@ -57,7 +57,7 @@
 					</div>
 					<div class="form-group">
 						<label>Tổng tiền</label>
-						<input type="text" class="form-control-plaintext" value="{{info.cost}}">
+						<input type="text" class="form-control-plaintext" value="{{money info.cost}}">
 					</div>
 				</div>
 			</div>

@@ -22,6 +22,8 @@ app.engine('hbs', exphbs({
       if_eq: function(src, target, options){
         if (src == target) 
           return options.fn(this);
+        else
+          return options.inverse(this);
       },
       money: function(num, options){
           var str = num.toString().replace(/\./g, "");

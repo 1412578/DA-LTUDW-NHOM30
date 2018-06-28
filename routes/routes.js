@@ -31,6 +31,7 @@ module.exports = {
 		router.post('/cart/update', restrict.user, users.cart_update);
 		router.get('/history', rememberThisPage, restrict.user, users.history);
 		router.post('/cart/create', restrict.user, users.cart_create);
+		router.post('/cart/remove', restrict.user, users.cart_remove);
 		
 		return router;
 	},

@@ -132,7 +132,9 @@ function showOrder(req, res, next){
 	})
 	.then(rows=>{
 		order.items = rows;
-		rows.forEach(item => item.totalPrice = item.price * item.number);
+		rows.forEach(item => {
+			item.totalPrice = item.price * item.number
+		});
 		res.render("order/show", {info: order});
 	})
 	.catch(err => next(err));

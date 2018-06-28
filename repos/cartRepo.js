@@ -6,6 +6,17 @@ exports.loadCart = function loadCart(user_id){
 			   WHERE user_id = ${user_id}`;
 	return db.load(sql);
 }
+exports.removeFromCart = function removeFromCart(user_id, product_id){
+	var sql = `DELETE FROM cart
+			   WHERE user_id = ${user_id} and product_id=${product_id}`;
+	return db.save(sql);
+}
+exports.loadCartByProductId = function loadCartByProductId(user_id, product_id){
+	var sql = `SELECT id, product_quantity
+			   FROM cart
+			   WHERE user_id = ${user_id} AND product_id = ${product_id}`;
+	return db.load(sql);
+}
 exports.load = username => {
 	var sql = `SELECT product_id, product.name, product.images, product.price, product.inventory_number, product_quantity, sold 
 			   FROM cart
