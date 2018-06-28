@@ -140,7 +140,7 @@ body{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 80%;
+	height: 70%;
 	overflow: hidden;
 	position: relative;
 }
@@ -152,19 +152,30 @@ body{
 	height: 100%;
 }
 .caption{
-	height: 20%;
+	height: 30%;
 	overflow: hidden;
 }
 .caption .title{
 	text-align: center;
-	font-size: 1.25rem;
-	color: black;
-	font-size: 1rem;
+	color: #2f2f2f;
+	font-size: 1.1rem;
 }
 .caption .price{
 	text-align: center;
 	color: #b82525;
-	font-size: 1rem;
+	font-size: 1em;
+}
+.caption .price:after{
+	content: " VNĐ";
+}
+.caption .caption-box{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 11px;
+}
+.caption .caption-box .vendor{
+	margin-left: 10px;
 }
 .caption .view{
 	color: black;

@@ -1,24 +1,27 @@
 <div class="col-sm-3">
-	Loại sản phẩm
-	<hr>
-    {{#each menu.categories}}
-    <nav>
-        <label>
-            <input type="checkbox" class="category-filter" data-query="categories[]={{this.id}}" {{#if_eq this.id ../categoryId}} checked {{/if_eq}}  {{#if ../categoryAll}}checked{{/if}}> {{this.category_name}}
-        </label>
-    </nav>
-    {{/each}}
-
-    <br>
-	Nhà sản xuất
-	<hr>
-   	{{#each menu.vendors}}
-    <nav>
-        <label>
-            <input type="checkbox" name="vendor" class="vendor-filter" data-query="vendors[]={{this.id}}"  {{#if_eq this.id ../vendorId}} checked {{/if_eq}}  {{#if ../vendorAll}}checked{{/if}}> {{this.vendor_name}}
-        </label>
-    </nav>
-    {{/each}}
+    <div style="{{#if categoryId}}display: none{{/if}}">
+    	Loại sản phẩm
+    	<hr>
+        {{#each menu.categories}}
+        <nav>
+            <label>
+                <input type="checkbox" class="category-filter" data-query="categories[]={{this.id}}" {{#if_eq this.id ../categoryId}} checked {{/if_eq}}  {{#if ../categoryAll}}checked{{/if}}> {{this.category_name}}
+            </label>
+        </nav>
+        {{/each}}
+        <br>
+    </div>
+    <div style="{{#if vendorId}}display: none{{/if}}">
+    	Nhà sản xuất
+    	<hr>
+       	{{#each menu.vendors}}
+        <nav>
+            <label>
+                <input type="checkbox" name="vendor" class="vendor-filter" data-query="vendors[]={{this.id}}"  {{#if_eq this.id ../vendorId}} checked {{/if_eq}}  {{#if ../vendorAll}}checked{{/if}}> {{this.vendor_name}}
+            </label>
+        </nav>
+        {{/each}}
+    </div>
     <br>
     Giá
     <hr>

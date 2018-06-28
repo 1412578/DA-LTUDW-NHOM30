@@ -169,17 +169,21 @@
 		function updateProducts(elem, json){
 			var htmlContent = json.items.map(function(item){
 				return `<div class="col-3">
-		                    <div class="product-item">
-		                        <div class="img-wrapper">
-		                            <a href="/product/${item.id}"><img src="${item.images}">
-									</a>
-		                        </div>
-		                        <div class="caption">
-		                            <div class="title">${item.name}</div>
-		                            <div class="price">${item.price}</div>
-		                        </div>
-		                    </div>
-		                </div>`;
+							<div class="product-item">
+							    <div class="img-wrapper">
+							        <a href="/product/${item.id}"><img src="${item.images}">
+							        </a>
+							    </div>
+							    <div class="caption">
+							        <div class="title">${item.name}</div>
+							        <div class="price">${formatMoney(item.price)}</div>
+							        <div class="caption-box">
+							            <div class="category">Loại: Whisky</div>
+							            <div class="vendor">NSX: Vodka</div>
+							        </div>
+							    </div>
+							</div>
+						</div>`;
 			}).reduce(function(a,b, index){
 				return (index % 3 == 0 ? `<div class="w-100"></div>` + a : a).concat(b);
 			},"");

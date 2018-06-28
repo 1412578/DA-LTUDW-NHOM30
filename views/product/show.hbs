@@ -76,16 +76,7 @@
         <div class="row">
         	{{#each product.sameCategory}}
             <div class="col-2m4">
-                <div class="product-item">
-                    <div class="img-wrapper">
-                        <a href="/product/{{this.id}}"><img class="w-100" src="{{this.images}}">
-							</a>
-                    </div>
-                    <div class="caption">
-                        <div class="title">{{this.name}}</div>
-                        <div class="price">{{this.price}}</div>
-                    </div>
-                </div>
+                {{> product this}}
             </div>
             {{/each}}
         </div>
@@ -96,16 +87,7 @@
         <div class="row">
         	{{#each product.sameVendor}}
             <div class="col-2m4">
-                <div class="product-item">
-                    <div class="img-wrapper">
-                        <a href="/product/{{this.id}}"><img class="w-100" src="{{this.images}}">
-							</a>
-                    </div>
-                    <div class="caption">
-                        <div class="title">{{this.name}}</div>
-                        <div class="price">{{this.price}}</div>
-                    </div>
-                </div>
+                {{> product this}}
             </div>
             {{/each}}
         </div>

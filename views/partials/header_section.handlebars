@@ -9,6 +9,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" class="dropdown-toggle" href="#">Loại</a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/product/list">Tất cả</a>
                         {{#each menu.categories}}
                         <a class="dropdown-item" href="/category/{{this.id}}">{{this.category_name}}</a>
                         {{/each}}
@@ -17,6 +18,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" class="dropdown-toggle" href="#">Nhà sản xuất</a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/product/list">Tất cả</a>
                          {{#each menu.vendors}}
                         <a class="dropdown-item" href="/vendor/{{this.id}}">{{this.vendor_name}}</a>
                         {{/each}}

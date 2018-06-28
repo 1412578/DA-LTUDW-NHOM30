@@ -22,6 +22,12 @@ app.engine('hbs', exphbs({
       if_eq: function(src, target, options){
         if (src == target) 
           return options.fn(this);
+      },
+      money: function(num, options){
+          var str = num.toString().replace(/\./g, "");
+          return Array.prototype.reduce.call(str, function(a,b, index){
+            return a + ((((str.length - index) % 3 == 0) && (index != 0)) ? "." + b : b);
+          }, "");
       }
     }
 }));
