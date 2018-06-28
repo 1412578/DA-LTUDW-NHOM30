@@ -7,7 +7,7 @@ exports.loadCart = function loadCart(user_id){
 	return db.load(sql);
 }
 exports.load = username => {
-	var sql = `SELECT product_id, product.name, product.images, product.price, product.inventory_number, product_quantity 
+	var sql = `SELECT product_id, product.name, product.images, product.price, product.inventory_number, product_quantity, sold 
 			   FROM cart
 			   JOIN user ON cart.user_id = user.id
 			   JOIN product ON cart.product_id = product.id

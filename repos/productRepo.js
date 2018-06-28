@@ -3,9 +3,16 @@ var db = require('../fn/db');
 var config = require('../config/config');
 
 
-exports.updateInventoryNumber = function(id, inventory_number){
+exports.updateInventoryNumber = function(id, product_quantity){
 	var sql = `UPDATE product 
-				SET inventory_number = ${inventory_number}
+				SET inventory_number = inventory_number - ${product_quantity}, sold = sold + ${product_quantity}
+				WHERE id = ${id}`;
+	
+	return db.save(sql, this._connection);
+}
+exports.updateSoldProduct = function(id, sold){
+	var sql = `UPDATE product 
+				SET sold = ${sold}
 				WHERE id = ${id}`;
 	
 	return db.save(sql, this._connection);
@@ -40,7 +47,7 @@ exports.getProductById = function(id){
 					price, description,
 					origin, category, 
 					maker, inventory_number, datetime, 
-					sold, view, category_id, vendor_id
+					sold, view, category_id, vendor_id, sold
 				FROM product WHERE id = ${id}`;
 	return db.load(sql);
 }

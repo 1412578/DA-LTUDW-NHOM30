@@ -68,7 +68,6 @@ function createOrder(req, res, next){
 		order.cost = cart.items.reduce(
 				(a,b) => a + b.product_quantity * b.price, 0 // calculate total cost of order
 			) ;
-		debug(order.cost);
 		return transaction.excute(orderRepo.add, order);
 	})
 	.then(results=>{
@@ -100,9 +99,9 @@ function createOrder(req, res, next){
 		return cart.items
 			.map(cartItem => ({ 
 				"id": cartItem.product_id,
-				"inventory_number": cartItem.inventory_number - cartItem.product_quantity
+				"product_quantity": cartItem.product_quantity
 			}))
-			.map(updateParamsItem => updateInventoryWrapper(updateParamsItem.id, updateParamsItem.inventory_number))
+			.map(updateParamsItem => updateInventoryWrapper(updateParamsItem.id, updateParamsItem.product_quantity))
 			.reduce((wrapper1,wrapper2) => wrapper1.then(()=>transaction.excute(wrapper2)), Promise.resolve());
 
 	})
