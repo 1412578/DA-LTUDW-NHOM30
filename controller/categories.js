@@ -14,7 +14,7 @@ function show(req, res, next){
 	})
 	.then(rows=>{
 		res.locals.products = rows;
-		res.render("product/list");
+		res.render("product/list", {csrfToken: req.csrfToken()});
 	})
 	.catch(err=>{
 		next(err);

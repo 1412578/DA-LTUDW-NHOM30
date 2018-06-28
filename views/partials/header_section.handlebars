@@ -37,6 +37,7 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" class="dropdown-toggle" href="#">Đăng nhập</a>
                     <div class="dropdown-menu px-3 pt-3">
                         <form method="post" action="/session/create">
+                            <input type="hidden" name="_csrf" value="{{csrfToken}}">
                             <div class="control-group">
                                 <input type="text" name="username" placeholder="Tên đăng nhập" class="span2" id="inputEmail">
                             </div>

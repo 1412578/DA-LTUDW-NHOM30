@@ -10,5 +10,14 @@
             <div class="category">Loại: {{this.category_name}}</div>
             <div class="vendor">NSX: {{this.vendor_name}}</div>
         </div>
+        <form method="POST" action="/user/cart/create" class="quantity-control">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <input type="hidden" name="product_id" value="{{this.id}}">
+            <input type="hidden" name="product_quantity" value="1">
+            <input type="hidden" name="product_increase" value="1">
+            <button class="add-btn-cart">
+                Thêm
+            </button>
+        </form>
     </div>
 </div>

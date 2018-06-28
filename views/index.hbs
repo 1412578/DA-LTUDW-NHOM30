@@ -9,7 +9,7 @@
 			<div class="row">
 				{{#each items.newest}}
 				<div class="col-2m4">
-					{{> product this}}
+					{{> product this csrfToken=../csrfToken}}
 				</div>
 				{{#if_eq @index 4}}
 				<div class="w-100"></div>
@@ -18,7 +18,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="row mt-5">
 		<div class="col">
 			<div class="section-title">
@@ -29,7 +28,7 @@
 			<div class="row">
 				{{#each items.mostSold}}
 				<div class="col-2m4">
-					{{> product this}}
+					{{> product this csrfToken=../csrfToken}}
 				</div>
 				{{#if_eq @index 4}}
 				<div class="w-100"></div>
@@ -49,7 +48,7 @@
 			<div class="row">
 				{{#each items.mostView}}
 				<div class="col-2m4">
-					{{> product this}}
+					{{> product this csrfToken=../csrfToken}}
 				</div>
 				{{#if_eq @index 4}}
 				<div class="w-100"></div>

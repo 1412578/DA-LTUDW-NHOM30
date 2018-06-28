@@ -44,6 +44,12 @@ exports.addToCart = function addToCart(user_id, product_id, product_quantity){
 				VALUES (${user_id}, ${product_id}, ${product_quantity})`;
 	return db.save(sql);
 }
+exports.increaseToCart = function increaseToCart(user_id, product_id, product_increase){
+	var sql = `	UPDATE cart
+				SET product_quantity = product_quantity + ${product_increase}
+				WHERE user_id = ${user_id} AND product_id = ${product_id}`;
+	return db.save(sql);
+}
 exports.checkCart = function checkCart(user_id, product_id){
 	var sql = ` SELECT id 
 				FROM cart 

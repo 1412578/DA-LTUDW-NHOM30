@@ -8,7 +8,7 @@
             <div class="row product-view">
                 {{#each products}}
                 <div class="col-3">
-                    {{> product this}}
+                    {{> product this csrfToken=../csrfToken}}
                 </div>
                 {{#if_eq @index 3}}
                 <div class="w-100"></div>

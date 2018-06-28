@@ -11,6 +11,7 @@ function index(req, res, next) {
 			res.locals.items.newest = results[0];
 			res.locals.items.mostView = results[1];
 			res.locals.items.mostSold = results[2];
+			res.locals.csrfToken = req.csrfToken();
 			res.render('index', { title: 'Alcool'});
 		})
 		.catch(err=>next(err));

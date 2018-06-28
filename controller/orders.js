@@ -16,7 +16,7 @@ function newOrder(req, res, next){
 		var userInfo = results[0][0];
 		var cart = {"items": results[1], "totalCost": 0};
 		cart.items.forEach(el=> el.totalPrice = el.product_quantity * el.price);
-		cart.totalCost = cart.items.reduce((a,b) => a.totalPrice + b.totalPrice);
+		cart.totalCost = cart.items.reduce((a,b) => a + b.totalPrice, 0);
 		res.locals.info = {};
 		res.locals.info.buyer_name = userInfo.name;
 		res.locals.info.receiver_name = userInfo.name;

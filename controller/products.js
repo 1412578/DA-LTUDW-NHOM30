@@ -66,6 +66,7 @@ function productList(req, res, next){
 		res.locals.products = rows;
 		res.locals.categoryAll = true;
 		res.locals.vendorAll = true;
+		res.locals.csrfToken = req.csrfToken();
 		res.render("product/list", {header: "Tất cả sản phẩm"});
 	}).catch(err=>next(err));
 }

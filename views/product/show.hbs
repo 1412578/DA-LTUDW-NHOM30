@@ -119,7 +119,6 @@ document.getElementById("increase").addEventListener("click", function(event) {
     if (isNaN(quantity) || quantity < 0)
         quantity = 0;
     quantityElem.value = quantity + 1;
-    debugger;
     event.preventDefault();
     event.stopPropagation();
 });

@@ -15,6 +15,7 @@ module.exports = {
 	"index": function(){
 		var router = express.Router();
 
+		router.use(csrfProtection);
 		router.get('/', rememberThisPage, index.index);
 
 		return router;
@@ -67,6 +68,7 @@ module.exports = {
 	"categories": function(){
 		var router = express.Router();
 
+		router.use(csrfProtection);
 		router.get('/:id', rememberThisPage, categories.show);
 
 		return router;
@@ -74,6 +76,7 @@ module.exports = {
 	"vendors": function(){
 		var router = express.Router();
 
+		router.use(csrfProtection);
 		router.get('/:id', rememberThisPage, vendors.show);
 
 		return router;
