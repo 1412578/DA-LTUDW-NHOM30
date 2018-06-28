@@ -1,0 +1,71 @@
+<div class="col-sm-3">
+	Loại sản phẩm
+	<hr>
+    {{#each menu.categories}}
+    <nav>
+        <label>
+            <input type="checkbox" class="category-filter" data-query="categories[]={{this.id}}" {{#if_eq this.id ../categoryId}} checked {{/if_eq}}  {{#if ../categoryAll}}checked{{/if}}> {{this.category_name}}
+        </label>
+    </nav>
+    {{/each}}
+
+    <br>
+	Nhà sản xuất
+	<hr>
+   	{{#each menu.vendors}}
+    <nav>
+        <label>
+            <input type="checkbox" name="vendor" class="vendor-filter" data-query="vendors[]={{this.id}}"  {{#if_eq this.id ../vendorId}} checked {{/if_eq}}  {{#if ../vendorAll}}checked{{/if}}> {{this.vendor_name}}
+        </label>
+    </nav>
+    {{/each}}
+    <br>
+    Giá
+    <hr>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="" checked> Tất cả
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=0&range[to]=500000"> 0 - 500.000
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=500000&range[to]=2000000"> 500.000 - 2.000.000
+        </label>
+    </nav>
+    <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=2000000&range[to]=10000000"> 2.000.000 - 10.000.000
+        </label>
+    </nav>
+     <nav>
+        <label>
+            <input class="price-select" name="price" type="radio" value="range[from]=10000000"> Trên 10.000.000
+        </label>
+    </nav>
+    <nav>
+     <label>
+        <input id="price-custom" name="price" type="radio" value="" checked> Tùy chọn
+    </label>
+    </nav>
+    <br>
+    <nav id="slider">
+    	<div class="slider-panel">
+    		<div class="slider-trail">
+    		</div>
+    		<div id="slider-bar" class="slider-bar"></div>
+    		<div id="slider-control-1" class="slider-control"></div>
+    		<div id="slider-control-2" class="slider-control"></div>
+    	</div>
+    	<br>
+    	<div class="slider-input">
+	    	<input id="min" value="0">
+	    	<input id="max" value="10.000.000">
+    	</div>
+    </nav>
+    <br><br><br><br><br>
+</div>

@@ -1,5 +1,11 @@
 var db = require('../fn/db');
 
+exports.loadCart = function loadCart(user_id){
+	var sql = `SELECT id
+			   FROM cart
+			   WHERE user_id = ${user_id}`;
+	return db.load(sql);
+}
 exports.load = username => {
 	var sql = `SELECT product_id, product.name, product.images, product.price, product.inventory_number, product_quantity 
 			   FROM cart
