@@ -6,8 +6,19 @@ exports.loadCart = function loadCart(user_id){
 			   WHERE user_id = ${user_id}`;
 	return db.load(sql);
 }
+exports.removeFromCart = function removeFromCart(user_id, product_id){
+	var sql = `DELETE FROM cart
+			   WHERE user_id = ${user_id} and product_id=${product_id}`;
+	return db.save(sql);
+}
+exports.loadCartByProductId = function loadCartByProductId(user_id, product_id){
+	var sql = `SELECT id, product_quantity
+			   FROM cart
+			   WHERE user_id = ${user_id} AND product_id = ${product_id}`;
+	return db.load(sql);
+}
 exports.load = username => {
-	var sql = `SELECT product_id, product.name, product.images, product.price, product.inventory_number, product_quantity 
+	var sql = `SELECT product_id, product.name, product.images, product.price, product.inventory_number, product_quantity, sold 
 			   FROM cart
 			   JOIN user ON cart.user_id = user.id
 			   JOIN product ON cart.product_id = product.id
@@ -31,6 +42,12 @@ exports.addToCart = function addToCart(user_id, product_id, product_quantity){
 					product_id, 
 					product_quantity)
 				VALUES (${user_id}, ${product_id}, ${product_quantity})`;
+	return db.save(sql);
+}
+exports.increaseToCart = function increaseToCart(user_id, product_id, product_increase){
+	var sql = `	UPDATE cart
+				SET product_quantity = product_quantity + ${product_increase}
+				WHERE user_id = ${user_id} AND product_id = ${product_id}`;
 	return db.save(sql);
 }
 exports.checkCart = function checkCart(user_id, product_id){

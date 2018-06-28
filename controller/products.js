@@ -26,17 +26,31 @@ function show(req, res, next){
 	productRepo.getProductById(req.params.id).then(rows=>{
 		if (rows <= 0) throw applicationError("PRODUCT_NOT_EXIST");
 		res.locals.product = rows[0];
-		return Promise.all([
-			categoryRepo.loadCategoryById(rows[0].category_id),
+		var promiseAll = [categoryRepo.loadCategoryById(rows[0].category_id),
 			vendorRepo.loadVendorById(rows[0].vendor_id),
 			productRepo.getProductByCategoryId(rows[0].category_id, {limit: 5}),
-			productRepo.getProductByVendorId(rows[0].vendor_id, {limit: 5})]);
+			productRepo.getProductByVendorId(rows[0].vendor_id, {limit: 5})];
+		if (req.session.user_id)
+			promiseAll.push(cartRepo.loadCartByProductId(req.session.user_id, rows[0].id));
+		return Promise.all(promiseAll);
+			
 	})
 	.then(results=>{
 		res.locals.product.category_name = results[0][0].category_name;
 		res.locals.product.vendor_name = results[1][0].vendor_name;
 		res.locals.product.sameCategory = results[2];
 		res.locals.product.sameVendor = results[3];
+		var product = results[4];
+		if (product){
+			if (product.length > 0){
+				res.locals.product.numInCart = product[0].product_quantity;
+				res.locals.product.inCart = true;
+			}
+			else{
+				res.locals.product.numInCart = 0;
+				res.locals.product.inCart = false;
+			}
+		}
 		res.render("product/show", {csrfToken: req.csrfToken()});
 	})
 	.catch(err => next(err));
@@ -52,6 +66,7 @@ function productList(req, res, next){
 		res.locals.products = rows;
 		res.locals.categoryAll = true;
 		res.locals.vendorAll = true;
+		res.locals.csrfToken = req.csrfToken();
 		res.render("product/list", {header: "Tất cả sản phẩm"});
 	}).catch(err=>next(err));
 }

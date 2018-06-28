@@ -3,9 +3,16 @@ var db = require('../fn/db');
 var config = require('../config/config');
 
 
-exports.updateInventoryNumber = function(id, inventory_number){
+exports.updateInventoryNumber = function(id, product_quantity){
 	var sql = `UPDATE product 
-				SET inventory_number = ${inventory_number}
+				SET inventory_number = inventory_number - ${product_quantity}, sold = sold + ${product_quantity}
+				WHERE id = ${id}`;
+	
+	return db.save(sql, this._connection);
+}
+exports.updateSoldProduct = function(id, sold){
+	var sql = `UPDATE product 
+				SET sold = ${sold}
 				WHERE id = ${id}`;
 	
 	return db.save(sql, this._connection);
@@ -18,20 +25,29 @@ exports.getInventoryNumber = function(id){
 }
 
 exports.limitNewestProduct = function(limit){
-	var sql = `	SELECT id, name, images, price 
-				FROM product ORDER BY datetime DESC LIMIT ${limit}`;
+	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name
+				FROM product 
+				JOIN vendor ON product.vendor_id = vendor.id
+				JOIN category ON product.category_id = category.id
+				ORDER BY datetime DESC LIMIT ${limit}`;
 	return db.load(sql);
 }
 
 exports.limitMostSoldProduct = function(limit){
-	var sql = `	SELECT id, name, images, price 
-				FROM product ORDER BY sold DESC LIMIT ${limit}`;
+	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name 
+				FROM product
+				JOIN vendor ON product.vendor_id = vendor.id
+				JOIN category ON product.category_id = category.id
+				ORDER BY sold DESC LIMIT ${limit}`;
 	return db.load(sql);
 }
 
 exports.limitMostViewProduct = function(limit){
-	var sql = `	SELECT id, name, images, price 
-				FROM product ORDER BY view DESC LIMIT ${limit}`;
+	var sql = `	SELECT product.id, name, images, price, vendor_name, category_name 
+				FROM product
+				JOIN vendor ON product.vendor_id = vendor.id
+				JOIN category ON product.category_id = category.id
+				ORDER BY view DESC LIMIT ${limit}`;
 	return db.load(sql);
 }
 
@@ -40,21 +56,25 @@ exports.getProductById = function(id){
 					price, description,
 					origin, category, 
 					maker, inventory_number, datetime, 
-					sold, view, category_id, vendor_id
+					sold, view, category_id, vendor_id, sold
 				FROM product WHERE id = ${id}`;
 	return db.load(sql);
 }
 exports.getProductByCategoryId = function getProductByCategoryId(category_id, options={}){
-	let sql = `	SELECT id, name, images, price
+	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name
 				FROM product
+				JOIN vendor ON product.vendor_id = vendor.id
+				JOIN category ON product.category_id = category.id
 				WHERE category_id = ${category_id}`;
 	if (options.limit)
 		sql += ` LIMIT ${options.limit}`;
 	return db.load(sql);
 }
 exports.getProductByVendorId = function getProductByVendorId(vendor_id, options={}){
-	let sql = `	SELECT id, name, images, price
+	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name
 				FROM product
+				JOIN vendor ON product.vendor_id = vendor.id
+				JOIN category ON product.category_id = category.id
 				WHERE vendor_id = ${vendor_id}`;
 	if (options.limit)
 		sql += ` LIMIT ${options.limit}`;
@@ -70,8 +90,11 @@ exports.getProductByFirstNamePrefix = function getProductByFirstNamePrefix(name)
 
 
 exports.getProductByFilter = function getProductByFilter(filters){
-	let sql = `	SELECT id, name, images, price
-				FROM product WHERE 1`;
+	let sql = `	SELECT product.id, name, images, price, vendor_name, category_name
+				FROM product 
+				JOIN vendor ON product.vendor_id = vendor.id
+				JOIN category ON product.category_id = category.id
+				WHERE 1`;
 	sql = filters.reduce((a,b)=>a.concat(b), sql) + ` ORDER BY PRICE DESC`;
 	console.log(sql);
 	return db.load(sql);

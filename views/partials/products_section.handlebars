@@ -8,16 +8,7 @@
             <div class="row product-view">
                 {{#each products}}
                 <div class="col-3">
-                    <div class="product-item">
-                        <div class="img-wrapper">
-                            <a href="/product/{{this.id}}"><img src="{{this.images}}">
-							</a>
-                        </div>
-                        <div class="caption">
-                            <div class="title">{{this.name}}</div>
-                            <div class="price">{{this.price}}</div>
-                        </div>
-                    </div>
+                    {{> product this csrfToken=../csrfToken}}
                 </div>
                 {{#if_eq @index 3}}
                 <div class="w-100"></div>

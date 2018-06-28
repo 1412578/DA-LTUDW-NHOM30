@@ -103,12 +103,34 @@ function cart_update(req, res, next){
 
 function cart_create(req, res, next){
 	let {product_id, product_quantity} = req.body;
+	let product_increase = null;
+	if (req.body.product_directive)
+		product_increase = 1;
 	let user_id = req.session.user_id;
 	cartRepo.checkCart(user_id, product_id).then(rows=>{
 		if (rows.length <= 0)
 			return cartRepo.addToCart(user_id, product_id, product_quantity);
+		else{
+			if (!product_increase)
+				return cartRepo.updateToCart(user_id, product_id, product_quantity);
+			else
+				return cartRepo.increaseToCart(user_id, product_id, product_increase);
+		}
+	})
+	.then(results=>{
+		res.redirect(`/product/${product_id}`);
+	})
+	.catch(err=>next(err));
+}
+
+function cart_remove(req, res, next){
+	let {product_id} = req.body;
+	let user_id = req.session.user_id;
+	cartRepo.checkCart(user_id, product_id).then(rows=>{
+		if (rows.length > 0)
+			return cartRepo.removeFromCart(user_id, product_id);
 		else
-			return cartRepo.updateToCart(user_id, product_id, product_quantity);
+			return Promise.reject("Something is broken");
 	})
 	.then(results=>{
 		res.redirect(`/product/${product_id}`);
@@ -132,6 +154,6 @@ function history(req, res, next){
 module.exports =  {
 	"show": show, "create": create, "info": info, "cart": cart,
 	"update": update, "history": history, "cart_update": cart_update,
-	"cart_create": cart_create
+	"cart_create": cart_create, "cart_remove": cart_remove
 };
 

@@ -33,7 +33,7 @@
                                         <line x1="0" y1="5" x2="10" y2="5" style="stroke:black;stroke-width:0.5" />
                                     </svg>
                                 </button>
-                                <input type="text" id="quantity" name="product_quantity" value="1">
+                                <input type="text" id="quantity" name="product_quantity" value="{{#if product.inCart}}{{product.numInCart}}{{else}}1{{/if}}">
                                 <button id="increase">
                                     <svg preserveAspectRatio="none" viewbox="0 0 10 10">
                                         <line x1="0" y1="5" x2="10" y2="5" style="stroke:black;stroke-width:0.6" />
@@ -41,7 +41,17 @@
                                     </svg>
                                 </button>
                             </div>
-                            <button class="cart-button" type="submit">Thêm vào giỏ hàng</button>
+                                {{#unless username}}
+                                <button  class="cart-button" type="submit">Thêm vào giỏ hàng</button>
+                                {{/unless}}
+                                {{#if username}}
+                                {{#if_eq 0 product.numInCart}}
+                                    <button  class="cart-button" type="submit">Thêm vào giỏ hàng</button>
+                                {{else}}
+                                    <button class="cart-button" type="submit">Cập nhật số lượng</button>
+                                {{/if_eq}}
+                                {{/if}}
+                                    <button style="{{#unless product.inCart}}display: none{{/unless}}" id="remove-cart" class="cart-button" type="submit">Bỏ khỏi giỏ hàng</button>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -68,6 +78,10 @@
                     </div>
                 </div>
             </form>
+            <form id="remove-cart-form" method="post" action="/user/cart/remove">
+                <input type="hidden" name="_csrf" value={{csrfToken}}>
+                <input type="hidden" name="product_id" value="{{product.id}}">
+            </form>
         </div>
     </div>
     <div class="stand-out">
@@ -76,16 +90,7 @@
         <div class="row">
         	{{#each product.sameCategory}}
             <div class="col-2m4">
-                <div class="product-item">
-                    <div class="img-wrapper">
-                        <a href="/product/{{this.id}}"><img class="w-100" src="{{this.images}}">
-							</a>
-                    </div>
-                    <div class="caption">
-                        <div class="title">{{this.name}}</div>
-                        <div class="price">{{this.price}}</div>
-                    </div>
-                </div>
+                {{> product this}}
             </div>
             {{/each}}
         </div>
@@ -96,16 +101,7 @@
         <div class="row">
         	{{#each product.sameVendor}}
             <div class="col-2m4">
-                <div class="product-item">
-                    <div class="img-wrapper">
-                        <a href="/product/{{this.id}}"><img class="w-100" src="{{this.images}}">
-							</a>
-                    </div>
-                    <div class="caption">
-                        <div class="title">{{this.name}}</div>
-                        <div class="price">{{this.price}}</div>
-                    </div>
-                </div>
+                {{> product this}}
             </div>
             {{/each}}
         </div>
@@ -113,12 +109,18 @@
 </div>
 <script>
 var quantityElem = document.getElementById("quantity");
+document.getElementById("remove-cart").addEventListener("click", function(event){
+    document.getElementById("remove-cart-form").submit();
+    event.preventDefault();
+    event.stopPropagation();
+});
 document.getElementById("increase").addEventListener("click", function(event) {
     var quantity = parseInt(quantityElem.value);
     if (isNaN(quantity) || quantity < 0)
         quantity = 0;
     quantityElem.value = quantity + 1;
     event.preventDefault();
+    event.stopPropagation();
 });
 document.getElementById("decrease").addEventListener("click", function(event) {
     var quantity = parseInt(quantityElem.value);
@@ -126,5 +128,6 @@ document.getElementById("decrease").addEventListener("click", function(event) {
         quantity = 2;
     quantityElem.value = quantity - 1;
     event.preventDefault();
+    event.stopPropagation();
 });
 </script>

@@ -23,7 +23,7 @@
 				<tr class="cart-item">
 					<input type="hidden" name="cart[{{@index}}][product_id]" value="{{this.product_id}}">
 					<td class="item-image">
-						<img src="{{this.images}}" class="">
+						<a href="/product/{{this.product_id}}"><img src="{{this.images}}" class=""></a>
 					</td>
 					<td class="item-name">{{this.name}}</td>
 					<td type="number" class="item-quantity"/><input type="number" name="cart[{{@index}}][product_quantity]" value="{{this.product_quantity}}"></td>

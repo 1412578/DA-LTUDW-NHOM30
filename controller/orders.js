@@ -16,7 +16,7 @@ function newOrder(req, res, next){
 		var userInfo = results[0][0];
 		var cart = {"items": results[1], "totalCost": 0};
 		cart.items.forEach(el=> el.totalPrice = el.product_quantity * el.price);
-		cart.totalCost = cart.items.reduce((a,b) => a.totalPrice + b.totalPrice);
+		cart.totalCost = cart.items.reduce((a,b) => a + b.totalPrice, 0);
 		res.locals.info = {};
 		res.locals.info.buyer_name = userInfo.name;
 		res.locals.info.receiver_name = userInfo.name;
@@ -68,7 +68,6 @@ function createOrder(req, res, next){
 		order.cost = cart.items.reduce(
 				(a,b) => a + b.product_quantity * b.price, 0 // calculate total cost of order
 			) ;
-		debug(order.cost);
 		return transaction.excute(orderRepo.add, order);
 	})
 	.then(results=>{
@@ -100,9 +99,9 @@ function createOrder(req, res, next){
 		return cart.items
 			.map(cartItem => ({ 
 				"id": cartItem.product_id,
-				"inventory_number": cartItem.inventory_number - cartItem.product_quantity
+				"product_quantity": cartItem.product_quantity
 			}))
-			.map(updateParamsItem => updateInventoryWrapper(updateParamsItem.id, updateParamsItem.inventory_number))
+			.map(updateParamsItem => updateInventoryWrapper(updateParamsItem.id, updateParamsItem.product_quantity))
 			.reduce((wrapper1,wrapper2) => wrapper1.then(()=>transaction.excute(wrapper2)), Promise.resolve());
 
 	})
@@ -110,7 +109,7 @@ function createOrder(req, res, next){
 		return transaction.commit();
 	})
 	.then(results=>{
-		res.redirect("/?msg=Đã tạo đơn hàng thành công");
+		res.redirect(req.cookies.previous_page || "/");
 	})
 	.catch(err=>{
 		if (transaction){
@@ -133,7 +132,9 @@ function showOrder(req, res, next){
 	})
 	.then(rows=>{
 		order.items = rows;
-		rows.forEach(item => item.totalPrice = item.price * item.number);
+		rows.forEach(item => {
+			item.totalPrice = item.price * item.number
+		});
 		res.render("order/show", {info: order});
 	})
 	.catch(err => next(err));
