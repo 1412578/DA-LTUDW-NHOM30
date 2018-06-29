@@ -85,6 +85,14 @@ module.exports = {
 		var router = express.Router();
 
 		router.get('/', admin.index);
+		router.post("/product", admin.insertproduct);
+		router.delete("/product/:product_id", admin.deleteProductById);
+		router.put("/category", admin.updateCategory);
+		router.post("/category", admin.insertCategory);
+		router.delete("/category/:category_id", admin.deleteCategoryById);
+		router.delete("/vendor/:vendor_id", admin.deleteVendorById);
+		router.post("/vendor", admin.insertVendor);
+		router.put("/order", admin.updateOrder);
 
 		return router;
 	},

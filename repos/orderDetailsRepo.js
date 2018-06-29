@@ -18,3 +18,12 @@ exports.getOrderDetailsByOrderId = function getOrderDetailsByOrderId(id, options
 	else
 		return db.load(sql);
 }
+
+exports.updateOrderStatus = function(order_id, status){
+	var sql = `update orders set status = ${status} where id = ${order_id}`;
+	return db.save(sql);
+}
+exports.getAllOrders = function(){
+	var sql = "select * from orders";
+	return db.load(sql);
+}

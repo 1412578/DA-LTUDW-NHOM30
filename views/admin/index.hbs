@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/stylesheets/bootstrap3.min.css">
 	<script src="/javascripts/jquery3.3.1.min.js"></script>
 	<script src="/javascripts/bootstrap3.3.7.min.js"></script>
 	<style type="text/css">
-	.sidebar{
+	/*.sidebar{
 		min-height: 100vh;
 		background-color: #874081;
 		padding: 0;
@@ -32,7 +32,7 @@
 	}
 	.tab-content{
 		margin-top: 30px;
-	}
+	}*/
 </style>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -170,7 +170,7 @@
 							</div>
 							<div class="form-group">
 								<label for="pwd">Loại sản phẩm:</label>
-								<select class="form-control" id="insert_category">
+								<select class="form-control py-0" id="insert_category">
 									{{#each data.categories}}
 									<option category_id = "{{this.id}}">{{this.category_name}}</option>
 									{{/each}}
@@ -190,7 +190,7 @@
 							</div>
 							<div class="form-group">
 								<label for="pwd">Nhà cung cấp:</label>
-								<select class="form-control" id="insert_vendor">
+								<select class="form-control py-0" id="insert_vendor">
 									{{#each data.vendors}}
 									<option vendor_id = "{{this.id}}">{{this.vendor_name}}</option>
 									{{/each}}
@@ -284,7 +284,7 @@
 
 						<tbody >
 							{{#each data.orders}}
-							<tr {{#if_eq this.status 1}} class="warning" {{/if_eq}} {{#if_eq this.status 2}} class="info" {{/if_eq}} {{#if_eq this.status 3}} class="success" {{/if_eq}}>
+							<tr class="X" {{#if_eq this.status 1}} class="order-status-row" {{/if_eq}} {{#if_eq this.status 2}} class="order-status-row" {{/if_eq}} {{#if_eq this.status 3}} class="order-status-row" {{/if_eq}}>
 								<td>
 									{{this.id}}
 								</td>
@@ -299,7 +299,7 @@
 								</td>
 								<td>
 									<div class="form-group">
-										<select class="form-control order-status" order_id="{{this.id}}">
+										<select class="form-control order-status py-0" order_id="{{this.id}}">
 											<option status = "{{this.status}}" value="ChuaGiao" {{#if_eq this.status 1}} selected= "true" {{/if_eq}}>Chưa Giao</option>
 											<option status = "{{this.status}}"  value="DangGiao" {{#if_eq this.status 2}} selected= "true" {{/if_eq}}>Đang Giao</option>
 											<option status = "{{this.status}}"  value="DaGiao" {{#if_eq this.status 3}} selected= "true" {{/if_eq}}>Đã Giao</option>
@@ -379,18 +379,27 @@
 				}
 			})
 		})
-		$(".order-status").change(function(){
-			var order_id = $(this).attr('order_id');
-			var status = $(this).val();
+		$(".X").on("change", ".order-status", function(e){
+			var order_id = $(e.target).attr('order_id');
+			var status = $(e.target).val();
 			var order_status_id = 1;
 			if(status == 'ChuaGiao'){
 				order_status_id = 1;
+				$(e.target).parents(".X").addClass("warning");
+				$(e.target).parents(".X").removeClass("info");
+				$(e.target).parents(".X").removeClass("success");
 			}
 			if(status == 'DangGiao'){
 				order_status_id = 2;
+				$(e.target).parents(".X").removeClass("warning");
+				$(e.target).parents(".X").addClass("info");
+				$(e.target).parents(".X").removeClass("success");
 			}
 			if(status == 'DaGiao'){
 				order_status_id = 3;
+				$(e.target).parents(".X").removeClass("warning");
+				$(e.target).parents(".X").removeClass("info");
+				$(e.target).parents(".X").addClass("success");
 			}
 
 			var data = {
@@ -403,9 +412,12 @@
 				dataType: "json",
 				data: data,
 				success: function(res){
-					alert(res.msg);
+					
 				}
 			})
+		});
+		$(".order-status").change(function(e){
+			
 		})
 	</script>
 </body>

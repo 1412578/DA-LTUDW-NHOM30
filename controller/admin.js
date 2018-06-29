@@ -7,19 +7,20 @@ var vendorRepo = require("../repos/vendorRepo");
 
 
 function index(req, res, next){
-	res.render("admin/index", {layout: null});
-	/*Promise.all([categoryRepo.load(), productRepo.getAllProducts(), orderRepo.getAllOrders(), vendorRepo.getAllVendors()]).then(function(results){
+	Promise.all([categoryRepo.load(), productRepo.getAllProducts(), orderRepo.getAllOrders(), vendorRepo.getAllVendors()]).then(function(results){
 		var data = {
 			categories : results[0],
 			products: results[1],
 			orders: results[2],
 			vendors: results[3]
 		}
-		res.render("admin/index", {data : data, layout: null});
+		data.products.forEach((item) => {
+		  item.inventory_number = parseInt(item.inventory_number);
+		});
+		res.render("admin/index", {data : data});
 	}).catch(function(err){
 		next(err);
-	});*/
-
+	});
 }
 function insertproduct(req, res, next){
 	var datetime = new Date();
