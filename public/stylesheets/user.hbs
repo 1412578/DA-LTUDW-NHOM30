@@ -1,0 +1,109 @@
+<form class="col" method="POST" action="/user/create">
+	<input type="hidden" name="_csrf" value="{{csrfToken}}">
+	<div class="row">
+		<h3 class="col">ĐĂNG KÝ TÀI KHOẢN</h3>
+	</div>
+	<hr class="soften"/>
+	<div class="row col">
+		<span style="color: red">{{msg}}</span>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="control-group">
+				<label class="control-label" for="inputFname">Tên đăng nhập<sup>*</sup></label>
+				<div class="controls">
+					<input type="text" id="inputFname" name="username" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">Thư điện tử </label>
+				<div class="controls">
+					<input type="text" name="email" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Mật khẩu <sup>*</sup></label>
+				<div class="controls">
+					<input type="password" name="password" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Xác nhận mật khẩu <sup>*</sup></label>
+				<div class="controls">
+					<input type="password" name="confirm_password" required>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="control-group">
+				<label class="control-label">Giới tính <sup>*</sup></label>
+				<div class="controls">
+					<select class="span1" name="gender" required>
+						<option value="male">Nam</option>
+						<option value="female">Nữ</option>
+						<option value="other">Khác</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputFname">Họ tên <sup>*</sup></label>
+				<div class="controls">
+					<input type="text" id="inputFname"  name="name" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Ngày sinh <sup>*</sup></label>
+				<div class="controls">
+					<input type="date" name="birthday" required/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="address">Địa chỉ </label>
+				<div class="controls">
+					<input type="text" name="address" required>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="phone">Số điện thoại </label>
+				<div class="controls">
+					<input type="text" name="phone" required>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<h5 class="col">CÁC ĐIỀU KHOẢN</h5>
+	</div>
+	<hr class="soften"/>
+	<br>
+	<div class="row">
+		<div class="col">
+			<div class="control-group">
+				<div class="controls">
+					<textarea class="w-100"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col">
+			<div class="control-group">
+				<div class="controls" >
+					<label class="float-right"><span>Tôi đã đọc kỹ các điều khoản và quyền riêng tư</span><input name="privacy" type="checkbox" class="ml-2" required></label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col">
+			<div class="control-group">
+				<div class="controls float-right">
+					<input type="submit" name="submitAccount" value="Đăng ký" class="exclusive shopBtn">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

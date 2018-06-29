@@ -4,53 +4,76 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="/javascripts/jquery3.3.1.min.js"></script>
+	<script src="/javascripts/bootstrap3.3.7.min.js"></script>
 	<style type="text/css">
-	body{
-		margin: 10px;
+	.sidebar{
+		min-height: 100vh;
+		background-color: #874081;
+		padding: 0;
+	}
+	.sidebar .nav{
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.sidebar .nav a{
+		letter-spacing: 0.5px;
+		color: white;
+		padding: 15px;
+		padding-left: 30px;
+	}
+	.sidebar .nav li:not(.active) a:hover{
+		background-color: #551b50;
+	}
+	.sidebar .nav a:focus{
+		color: #551b50;
+	}
+	.tab-content{
+		margin-top: 30px;
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body >
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<!-- Danh mục chức năng-->
-			<div class="col-md-4">
+			<div class="col-md-3 sidebar">
 				<ul class="nav navbar-link">
 					<li >
 						<a data-toggle="tab" href="#QLSPNSX"> 
-							<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspQuản Lí Danh Mục Sản Phẩm
+							Quản Lí Danh Mục Sản Phẩm
 						</a>
 					</li>
 
 					<li >
 						<a data-toggle="tab" href="#QLNG"> 
-							<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspQuản Lí nguồn gốc sản phẩm
+							Quản Lí nguồn gốc sản phẩm
 						</a>
 					</li>
 					<li >
 						<a data-toggle="tab" href="#ThongTinTaiKhoan"> 
-							<span class="glyphicon glyphicon-user"></span>&nbsp&nbsp&nbspChỉnh Sửa Sản Phẩm
+							Chỉnh Sửa Sản Phẩm
 						</a>
 					</li>
 
 
 					<li>
-						<a data-toggle="tab" href="#QuanLySanPham"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspNơi Quản lí sản phẩm</a>
+						<a data-toggle="tab" href="#QuanLySanPham">Nơi Quản lí sản phẩm</a>
 					</li>
 
 
 					<li>
-						<a data-toggle="tab" href="#QuanLiDonHang"><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp&nbspNơi Quản lí Đơn hàng</a>
+						<a data-toggle="tab" href="#QuanLiDonHang">Nơi Quản lí Đơn hàng</a>
 					</li>
 				</ul>
 			</div>
 
 
 
-			<div class="tab-content col-md-8"> 
+			<div class="tab-content col-md-9"> 
 				<div id= "QLSPNSX" class="tab-pane fade">
 					<div class="col-md-6">
 						<h3 style="color: #00bfff;">Thêm Danh Mục Sản Phẩm</h3>

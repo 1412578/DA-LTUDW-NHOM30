@@ -118,7 +118,7 @@ function cart_create(req, res, next){
 		}
 	})
 	.then(results=>{
-		res.redirect(`/product/${product_id}`);
+		res.redirect(req.cookies.previous_page||`/product/${product_id}`);
 	})
 	.catch(err=>next(err));
 }
@@ -133,7 +133,7 @@ function cart_remove(req, res, next){
 			return Promise.reject("Something is broken");
 	})
 	.then(results=>{
-		res.redirect(`/product/${product_id}`);
+		res.redirect(req.cookies.previous_page ||`/product/${product_id}`);
 	})
 	.catch(err=>next(err));
 }
