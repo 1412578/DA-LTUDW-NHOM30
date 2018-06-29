@@ -122,3 +122,28 @@ exports.getFilterByPrice = function getFilterByPrice(range){
 	}
 	return sql;
 }
+
+exports.getAllProducts = function(){
+	var sql = `SELECT* FROM product`;
+	return db.load(sql);
+}
+
+exports.deleteProductById = function(product_id){
+	var sql = `DELETE FROM product WHERE id = ${product_id}`;
+	console.log(sql);
+	return db.save(sql);
+}
+
+exports.deleteProductById = function(product_id){
+	var sql = `DELETE FROM product WHERE id = ` + product_id;
+	console.log(sql);
+	return db.save(sql);
+}
+
+exports.insert = function(product){
+	var sql = "INSERT INTO product (name, images, category, origin, description, inventory_number, price, datetime, category_id, vendor_id)"+
+	" VALUES ('"+product.name + "', '"+ product.images +"', '"+ product.category + "', '"+ product.origin +"', '" +
+	 product.description + "', "+ product.inventory_number+ ", "+ product.price + ", '"+ product.datetime + "', "+ product.category_id + ", " + product.vendor_id + ")";
+	console.log(sql);
+	return db.save(sql);
+}
