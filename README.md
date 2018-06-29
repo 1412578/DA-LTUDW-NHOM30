@@ -11,15 +11,11 @@ Thành viên
 * Đường dẫn phân hệ admin: localhost:8080/admin/index.html
 * Đường dẫn phân hệ user: localhost:8080/user/profile.html
 * Đường dẫn phân hệ guest: localhost:8080/index.html
+## Host
+http://206.189.238.175
+
 ## Cơ sở dữ liệu
 * connection: 35.229.203.138
-* port: 3306
-* username: user
-* password: user
-* Vd: 
-```bash
-mysql -u user -p 35.229.203.138
-```
 * Db scripts nằm ở thư mục db_scripts
 
 ## Yêu cầu đồ án
