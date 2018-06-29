@@ -72,6 +72,37 @@ function updateCategory(){
 
 }
 
+function deleteVendorById(req, res, next){
+	console.log(req.params);
+	vendorRepo.deleteById(req.params.vendor_id)
+	.then(function(results){
+		res.status(200).json({
+			err: false
+		})
+	}).catch(function(err){
+		next(err);
+	});
+}
+
+function insertVendor(req, res, next){
+	vendorRepo.insert(req.body.vendor_name)
+	.then(function(results){
+		res.redirect("/admin");
+	}).catch(function(err){
+		next(err);
+	});
+}
+
+function updateOrder(req, res, next){
+	orderRepo.updateOrderStatus(req.body.order_id, req.body.order_status)
+	.then(function(results){
+		res.status(200).json({
+			msg: "cập nhật thành công!"
+		})
+	}).catch(function(err){
+		next(err);
+	});
+}
 
 module.exports =  {
 	"index": index,
@@ -79,5 +110,8 @@ module.exports =  {
 	"deleteProductById": deleteProductById,
 	"insertCategory": insertCategory,
 	"deleteCategoryById": deleteCategoryById,
-	"updateCategory": updateCategory
+	"updateCategory": updateCategory,
+	"deleteVendorById": deleteVendorById,
+	"insertVendor": insertVendor,
+	"updateOrder": updateOrder
 };
