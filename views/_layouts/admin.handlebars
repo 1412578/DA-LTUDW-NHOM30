@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>VTeam Shopping Website</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Cửa hàng bán rượu trực tuyến">
+		<meta name="author" content="VTeam">
+		<link href="/stylesheets/bootstrap.css" rel="stylesheet"/>
+		<script src="/javascripts/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8" async defer></script>
+		<script src="/javascripts/jquery.min.js" type="text/javascript" charset="utf-8" async defer></script>
+		<script src="/javascripts/search-box.js" defer></script>
+		<!--[if IE 7]>
+			<link href="stylesheets/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet">
+		<![endif]-->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!-- Favicons -->
+		<link rel="shortcut icon" href="/ico/favicon.ico">
+	</head>
+	<body>
+		{{> header_section this}}
+
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<div class="container">
+			<div id="gototop"> </div>
+			<br>
+			<div class="row">
+				{{{body}}}
+			</div>
+		</div>
+		{{> footer_section}}
+		<script src="/javascripts/jquery.min.js"></script>
+		<script src="/javascripts/bootstrap.bundle.min.js"></script>
+		<script>
+			(function(){
+				var lock = false;
+				function checkScroll(){
+				var startY = 10;
+				if($(window).scrollTop() > startY){
+				$('.navbar').addClass("scrolled");
+				}else{
+				$('.navbar').removeClass("scrolled");
+				}
+				}
+			$(window).scroll(function(){
+			checkScroll();
+			});
+			})();
+		</script>
+	</body>
+</html>

@@ -30,6 +30,13 @@ app.engine('hbs', exphbs({
           return Array.prototype.reduce.call(str, function(a,b, index){
             return a + ((((str.length - index) % 3 == 0) && (index != 0)) ? "." + b : b);
           }, "");
+      },
+      statusFormat: function(num, options){
+        if (num == 1)
+          return "Chưa giao";
+        else if (num == 2)
+            return "Đang giao";
+        else return "Đã giao";
       }
     }
 }));

@@ -29,7 +29,7 @@
 				<tr class="history-item">
 					<td class="item-code"><a href="/order/{{this.id}}">{{this.id}}</a></td>
 					<td class="item-totalprice">{{money this.cost}} VNĐ</td>
-					<td class="item-status paid">{{this.status}}</td>
+					<td class="item-status paid">{{statusFormat this.status}}</td>
 					<td class="item-date">
 						<noscript>{{this.order_datetime}} UTC</noscript>
 						<script>

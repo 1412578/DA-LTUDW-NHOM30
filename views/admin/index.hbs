@@ -5,36 +5,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/stylesheets/bootstrap3.min.css">
 	<script src="/javascripts/jquery3.3.1.min.js"></script>
+	
 	<script src="/javascripts/bootstrap3.3.7.min.js"></script>
-	<style type="text/css">
-	/*.sidebar{
-		min-height: 100vh;
-		background-color: #874081;
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+	.info{
+		display: table-column !important;
+		margin: 0 !important;
+	}
+	.order-status{
 		padding: 0;
 	}
-	.sidebar .nav{
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
+	.py-0{
+		padding: 0 !important;
 	}
-	.sidebar .nav a{
-		letter-spacing: 0.5px;
-		color: white;
-		padding: 15px;
-		padding-left: 30px;
-	}
-	.sidebar .nav li:not(.active) a:hover{
-		background-color: #551b50;
-	}
-	.sidebar .nav a:focus{
-		color: #551b50;
-	}
-	.tab-content{
-		margin-top: 30px;
-	}*/
 </style>
-<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body >
 	<div class="container-fluid">
@@ -239,7 +225,7 @@
 				</div>
 
 				<div id="QuanLySanPham" class="tab-pane fade">
-					<table class="table">
+					<table class="table table-hover table-bordered text-center">
 						<thead>
 							<tr>
 								<th>Sản Phẩm</th>
@@ -251,7 +237,7 @@
 						<tbody>
 							{{#each data.products}}
 							<tr>
-								<td>
+								<td class="text-left">
 									{{this.name}}
 								</td>
 								<td>
@@ -284,7 +270,7 @@
 
 						<tbody >
 							{{#each data.orders}}
-							<tr class="X" {{#if_eq this.status 1}} class="order-status-row" {{/if_eq}} {{#if_eq this.status 2}} class="order-status-row" {{/if_eq}} {{#if_eq this.status 3}} class="order-status-row" {{/if_eq}}>
+							<tr {{#if_eq this.status 1}} class="X warning" {{/if_eq}} {{#if_eq this.status 2}} class="X info" {{/if_eq}} {{#if_eq this.status 3}} class="X success" {{/if_eq}}>
 								<td>
 									{{this.id}}
 								</td>

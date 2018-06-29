@@ -2,7 +2,7 @@
 	<div class="order-box">
 		<h3 class="order-title">CHI TIẾT ĐƠN HÀNG</h3>
 		<div class="order-status">Mã đơn hàng: <span> {{info.id}}</span></div>
-		<div class="order-status">Trạng thái: <span> {{info.status}}</span></div>
+		<div class="order-status">Trạng thái: <span> {{statusFormat info.status}}</span></div>
 		<hr>
 		<form method="POST" action="/order/create">
 		<input type="hidden" name="_csrf" value="{{csrfToken}}">

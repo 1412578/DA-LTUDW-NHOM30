@@ -43,7 +43,7 @@ function createOrder(req, res, next){
 		"receiver_email": req.body.receiver_email,
 		"user_id": req.session.user_id,
 		"order_datetime": new moment.utc().format("YYYY-MM-DD HH-mm-ss"),
-		"status": "CHECKOUT"
+		"status": "1"
 	};
 	var transaction = null;
 	var cart = {items: null};
