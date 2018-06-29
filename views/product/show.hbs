@@ -12,7 +12,11 @@
                 <div class="title">{{product.name}}</div>
                 <div class="sub-box">
                     <div class="status">
+                        {{#if_eq product.inventory_number 0}}
+                        Hết hàng
+                        {{else}}
                         Còn hàng
+                        {{/if_eq}}
                     </div>
                 </div>
                 <hr style="width: 100%" />
@@ -26,6 +30,7 @@
                             <div class="title">Giá</div>
                             <div class="value">{{product.price}}</div>
                         </div>
+                        {{#if_eq product.inventory_number 0}}{{else}}
                         <div class="add-cart">
                             <div class="quantity-control">
                                 <button id="decrease">
@@ -53,6 +58,7 @@
                                 {{/if}}
                                     <button style="{{#unless product.inCart}}display: none{{/unless}}" id="remove-cart" class="cart-button" type="submit">Bỏ khỏi giỏ hàng</button>
                         </div>
+                        {{/if_eq}}
                     </div>
                     <div class="col-sm-6">
                         <div class="box view">
@@ -90,7 +96,7 @@
         <div class="row">
         	{{#each product.sameCategory}}
             <div class="col-2m4">
-                {{> product this}}
+                {{> product this csrfToken=../csrfToken}}
             </div>
             {{/each}}
         </div>
@@ -101,7 +107,7 @@
         <div class="row">
         	{{#each product.sameVendor}}
             <div class="col-2m4">
-                {{> product this}}
+                {{> product this csrfToken=../csrfToken}}
             </div>
             {{/each}}
         </div>

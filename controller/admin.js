@@ -21,7 +21,6 @@ function index(req, res, next){
 	}).catch(function(err){
 		next(err);
 	});
-
 }
 function insertproduct(req, res, next){
 	var datetime = new Date();
